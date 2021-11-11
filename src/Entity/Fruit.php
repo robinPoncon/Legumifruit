@@ -6,9 +6,15 @@ use App\Repository\FruitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=FruitRepository::class)
+ * @UniqueEntity(
+ *  fields={"name"},
+ *  message="The name of the fruit you entered already exists."
+ * )
  */
 class Fruit
 {
@@ -20,7 +26,8 @@ class Fruit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
+     * @Assert\NotBlank(message="This field cannot be empty.")
      */
     private $name;
 
