@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -19,7 +21,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @UniqueEntity(
  *  fields={"pseudonyme"},
- *  message="The username you entered already exists."
+ *  message="The pseudonyme you entered already exists."
+ * )
+ * @ApiResource(
+ *      normalizationContext={
+ *          "groups"={"user_read"}
+ *      }
  * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -28,17 +35,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(message="This email is not valid.")
+     * @Groups({"user_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user_read"})
      */
     private $roles = [];
 
@@ -51,41 +61,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank(message="This field cannot be empty.")
+     * @Groups({"user_read"})
      */
     private $pseudonyme;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_read"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_read"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_read"})
      */
     private $logo;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
+     * @Groups({"user_read"})
      */
     private $locale;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Groups({"user_read"})
      */
     private $colorTheme;
 
     /**
      * @ORM\ManyToMany(targetEntity=Vegetable::class, inversedBy="users")
+     * @Groups({"user_read"})
      */
     private $vegetables;
 
     /**
      * @ORM\ManyToMany(targetEntity=Fruit::class, inversedBy="users")
+     * @Groups({"user_read"})
      */
     private $fruits;
 

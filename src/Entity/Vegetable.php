@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\VegetableRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VegetableRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -15,6 +17,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  fields={"name"},
  *  message="The name of the vegetable you entered already exists."
  * )
+ * @ApiResource(
+ *      normalizationContext={
+ *          "groups"={"vegetable_read"}
+ *      }
+ * )
  */
 class Vegetable
 {
@@ -22,32 +29,38 @@ class Vegetable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"vegetable_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank(message="This field cannot be empty.")
+     * @Groups({"vegetable_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"vegetable_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"vegetable_read"})
      */
     private $image;
 
     /**
      * @ORM\ManyToMany(targetEntity=Calendar::class, inversedBy="vegetables")
+     * @Groups({"vegetable_read"})
      */
     private $calendar;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="vegetables")
+     * @Groups({"vegetable_read"})
      */
     private $users;
 

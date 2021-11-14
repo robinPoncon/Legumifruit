@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\FruitRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FruitRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -15,6 +17,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  fields={"name"},
  *  message="The name of the fruit you entered already exists."
  * )
+ * @ApiResource(
+ *      normalizationContext={
+ *          "groups"={"fruit_read"}
+ *      }
+ * )
  */
 class Fruit
 {
@@ -22,32 +29,38 @@ class Fruit
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"fruit_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank(message="This field cannot be empty.")
+     * @Groups({"fruit_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"fruit_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"fruit_read"})
      */
     private $image;
 
     /**
      * @ORM\ManyToMany(targetEntity=Calendar::class, inversedBy="fruits")
+     * @Groups({"fruit_read"})
      */
     private $calendar;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="fruits")
+     * @Groups({"fruit_read"})
      */
     private $users;
 
