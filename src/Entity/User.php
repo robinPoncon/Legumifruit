@@ -54,6 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     * @Assert\NotBlank(message="This field cannot be empty.")
      * @ORM\Column(type="string")
      */
     private $password;
