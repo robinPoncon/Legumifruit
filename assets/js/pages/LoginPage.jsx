@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
-import {login} from "../services/authApi";
+import React, {useContext, useState} from 'react';
+import authAPI from "../services/authAPI";
+import authContext from "../contexts/AuthContext";
 
-const LoginPage = (props) => {
+const LoginPage = ({history}) => {
+
+    const {setIsAuthenticated} = useContext(authContext);
 
     const [credentials, setCredentials] = useState({
         username: "",
@@ -19,7 +22,9 @@ const LoginPage = (props) => {
         event.preventDefault();
 
         try {
-            await login(credentials);
+            await authAPI.login(credentials);
+            setIsAuthenticated(true);
+            history.replace("/");
         }
         catch(error) {
             console.log(error.response);

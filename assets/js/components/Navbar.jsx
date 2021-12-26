@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { NavLink } from 'react-router-dom';
-import {logout} from "../services/authApi";
+import authAPI from "../services/authAPI";
+import authContext from "../contexts/AuthContext";
 
-const Navbar = (props) => {
+const Navbar = ({history}) => {
+
+    const {isAuthenticated, setIsAuthenticated} = useContext(authContext);
 
     const handleLogout = () => {
-        return logout();
+        authAPI.logout();
+        setIsAuthenticated(false);
+        history.push("/login");
     }
 
     return ( 
@@ -19,9 +24,14 @@ const Navbar = (props) => {
                 </ul>
             </div>
             <div>
-                <NavLink to="/registration">Registration</NavLink>
-                <NavLink to="/login">Login</NavLink>
-                <button type="button" onClick={handleLogout}>Logout</button>
+                {!isAuthenticated ? 
+                    <>
+                        <NavLink to="/registration">Registration</NavLink>
+                        <NavLink to="/login">Login</NavLink>
+                    </>
+                :  
+                    <button type="button" onClick={handleLogout}>Logout</button>
+                }
             </div>
         </nav>
      );
