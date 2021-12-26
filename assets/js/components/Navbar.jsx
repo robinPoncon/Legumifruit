@@ -1,8 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Button from './Button';
+import {logout} from "../services/authApi";
 
 const Navbar = (props) => {
+
+    const handleLogout = () => {
+        return logout();
+    }
+
     return ( 
         <nav className="d-flex st-navbarContainer">
             <div className="st-navigation">
@@ -16,7 +21,7 @@ const Navbar = (props) => {
             <div>
                 <NavLink to="/registration">Registration</NavLink>
                 <NavLink to="/login">Login</NavLink>
-                <Button classButton="" content="Logout"></Button>
+                <button type="button" onClick={handleLogout}>Logout</button>
             </div>
         </nav>
      );

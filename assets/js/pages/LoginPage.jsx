@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axios from "axios";
+import {login} from "../services/authApi";
 
 const LoginPage = (props) => {
 
@@ -17,11 +17,9 @@ const LoginPage = (props) => {
 
     const handleSubmit = async(event) => {
         event.preventDefault();
-        console.log(credentials);
 
         try {
-            await axios.post("https://localhost:8000/api/login_check", credentials)
-                .then(response => console.log(response));
+            await login(credentials);
         }
         catch(error) {
             console.log(error.response);
