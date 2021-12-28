@@ -11,6 +11,7 @@ import ReactDOM from "react-dom";
 
 import './css/app.css';
 import "./css/components/Navbar.scss";
+import "./css/styleManagement.css";
 
 // start the Stimulus application
 import './bootstrap';
@@ -25,12 +26,15 @@ import RegistrationPage from './js/pages/RegistrationPage';
 import LoginPage from './js/pages/LoginPage';
 import authAPI from "./js/services/authAPI";
 import AuthContext from "./js/contexts/AuthContext";
+import ThemeContext from './js/contexts/ThemeContext';
+import userRequest from './js/services/userRequest';
 
 authAPI.setup();
 
 const App = () => {
 
     const [isAuthenticated, setIsAuthenticated] = useState(authAPI.isAuthenticated());
+    const [theme, setTheme] = useState(userRequest.getThemeUser());
 
     const NavbarWithRouter = withRouter(Navbar);
 
@@ -39,25 +43,41 @@ const App = () => {
         setIsAuthenticated: setIsAuthenticated
     }
 
-    console.log(isAuthenticated);
+    const contextThemeValue = {
+        theme: theme,
+        setTheme: setTheme
+    }
+
+    // const switchTheme = () => {
+    //     if (theme === "light") {
+    //         setTheme("dark");
+    //     }
+    //     else {
+    //         setTheme("light");
+    //     }
+    // }
+
+    console.log(theme);
 
     return (
-        <AuthContext.Provider value={contextValue}>
-            <BrowserRouter> 
-                <NavbarWithRouter/>
-                <main className="st-principalContainer">
-                    <Switch>
-                        <Route exact path="/fruits" component={AllFruitsPage}></Route>
-                        <Route exact path="/vegetables" component={AllVegetablesPage}></Route>
-                        <Route exact path="/contact" component={ContactPage}></Route>
-                        <Route exact path="/registration" component={RegistrationPage}></Route>
-                        <Route exact path="/login" component={LoginPage}/>
-                        <Route exact path="/" component={HomePage}></Route>
-                        <Route path="*" component={NotFoundPage}></Route>
-                    </Switch>
-                </main>
-            </BrowserRouter>
-        </AuthContext.Provider>
+        <ThemeContext.Provider value={contextThemeValue}>
+            <AuthContext.Provider value={contextValue}>
+                <BrowserRouter> 
+                    <NavbarWithRouter/>
+                    <main className="st-principalContainer" data-theme={theme}>
+                        <Switch>
+                            <Route exact path="/fruits" component={AllFruitsPage}></Route>
+                            <Route exact path="/vegetables" component={AllVegetablesPage}></Route>
+                            <Route exact path="/contact" component={ContactPage}></Route>
+                            <Route exact path="/registration" component={RegistrationPage}></Route>
+                            <Route exact path="/login" component={LoginPage}/>
+                            <Route exact path="/" component={HomePage}></Route>
+                            <Route path="*" component={NotFoundPage}></Route>
+                        </Switch>
+                    </main>
+                </BrowserRouter>
+            </AuthContext.Provider>
+        </ThemeContext.Provider>
     )
 }
 

@@ -1,10 +1,13 @@
 import React, {useContext, useState} from 'react';
 import authAPI from "../services/authAPI";
 import authContext from "../contexts/AuthContext";
+import themeContext from "../contexts/ThemeContext";
+import userRequest from '../services/userRequest';
 
 const LoginPage = ({history}) => {
 
     const {setIsAuthenticated} = useContext(authContext);
+    const {setTheme} = useContext(themeContext);
 
     const [credentials, setCredentials] = useState({
         username: "",
@@ -23,6 +26,9 @@ const LoginPage = ({history}) => {
 
         try {
             await authAPI.login(credentials);
+            const theme = await userRequest.getThemeUser();
+            setTheme(theme);
+            userRequest.setAppTheme(theme);
             setIsAuthenticated(true);
             history.replace("/");
         }

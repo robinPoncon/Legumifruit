@@ -8,12 +8,12 @@ function logout() {
 
 function login(credentials) {
     return axios
-        .post("https://localhost:8000/api/login_check", credentials)
-        .then(response => response.data.token)
-        .then(token => {
-            window.localStorage.setItem("authToken", token);
-            setAxiosToken(token);
-        });
+    .post("https://localhost:8000/api/login_check", credentials)
+    .then(response => response.data.token)
+    .then(token => {
+        window.localStorage.setItem("authToken", token);
+        setAxiosToken(token);
+    });
 }
 
 function setAxiosToken(token) {
