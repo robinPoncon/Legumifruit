@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=FruitRepository::class)
  * @UniqueEntity(
- *  fields={"name"},
+ *  fields={"name_en, name_fr"},
  *  message="The name of the fruit you entered already exists."
  * )
  * @ApiResource(
@@ -38,13 +38,13 @@ class Fruit
      * @Assert\NotBlank(message="This field cannot be empty.")
      * @Groups({"fruit_read"})
      */
-    private $name;
+    private $name_en;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"fruit_read"})
      */
-    private $description;
+    private $description_en;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -64,6 +64,18 @@ class Fruit
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"fruit_read"})
+     */
+    private $name_fr;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"fruit_read"})
+     */
+    private $description_fr;
+
     public function __construct()
     {
         $this->calendar = new ArrayCollection();
@@ -75,26 +87,26 @@ class Fruit
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameEn(): ?string
     {
-        return $this->name;
+        return $this->name_en;
     }
 
-    public function setName(string $name): self
+    public function setNameEn(string $name_en): self
     {
-        $this->name = $name;
+        $this->name_en = $name_en;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescriptionEn(): ?string
     {
-        return $this->description;
+        return $this->description_en;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescriptionEn(?string $description_en): self
     {
-        $this->description = $description;
+        $this->description_en = $description_en;
 
         return $this;
     }
@@ -158,6 +170,30 @@ class Fruit
         if ($this->users->removeElement($user)) {
             $user->removeFruit($this);
         }
+
+        return $this;
+    }
+
+    public function getNameFr(): ?string
+    {
+        return $this->name_fr;
+    }
+
+    public function setNameFr(?string $name_fr): self
+    {
+        $this->name_fr = $name_fr;
+
+        return $this;
+    }
+
+    public function getDescriptionFr(): ?string
+    {
+        return $this->description_fr;
+    }
+
+    public function setDescriptionFr(?string $description_fr): self
+    {
+        $this->description_fr = $description_fr;
 
         return $this;
     }
