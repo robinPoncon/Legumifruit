@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode";
 
 function logout() {
     window.localStorage.removeItem("authToken");
+    window.localStorage.removeItem("userTheme");
     delete axios.defaults.headers["Authorization"];
 }
 
@@ -11,6 +12,8 @@ function login(credentials) {
     .post("https://localhost:8000/api/login_check", credentials)
     .then(response => response.data.token)
     .then(token => {
+        let jwtData = jwtDecode(token);
+        window.localStorage.setItem("userTheme", jwtData.colorTheme);
         window.localStorage.setItem("authToken", token);
         setAxiosToken(token);
     });
@@ -27,7 +30,6 @@ function setup() {
         const jwtData = jwtDecode(token);
         if (jwtData.exp * 1000 > new Date().getTime()) {
             setAxiosToken(token);
-            console.log("conexxion reussi");
         }
         else {
             logout();

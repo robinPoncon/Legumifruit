@@ -4,9 +4,11 @@ import jwtDecode from "jwt-decode";
 function getThemeUser() {
     const userTheme = window.localStorage.getItem("userTheme");
     if (userTheme) {
+        setAppTheme(userTheme);
         return userTheme;
     }
     else {
+        setAppTheme("light");
         return "light";
     }
 }
@@ -27,7 +29,6 @@ function setThemeUser(theme) {
 function setAppTheme(theme) {
     const rootElement = document.querySelector("body");
     rootElement.setAttribute("data-theme", theme);
-    // problem with body color 
 }
 
 export default {
