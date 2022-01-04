@@ -1,0 +1,49 @@
+.st-blocTheme {
+    background-color: var(--secondaryColor);
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 5px;
+    padding-right: 0;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    p {
+        margin-bottom: 0;
+    }
+    .st-nameTheme {
+        margin-top: auto;
+        margin-bottom: auto;
+        overflow: hidden;
+        opacity: 1;
+        padding-left: 5px;
+        transition: width 0.5s;
+        width: 0;
+        white-space: nowrap;
+    }
+}
+
+.st-blocTheme:hover .st-iconSun[data-theme="dark"] {
+    background-image: url("/assets/images/icons/icon_sun-hover.svg");
+}
+
+.st-blocTheme:hover .st-iconSun[data-theme="light"] {
+    background-image: url("/assets/images/icons/icon_night-hover.svg");
+}
+
+.st-blocTheme:hover .st-nameTheme {
+    width: 105px;
+}
+
+.st-iconSun[data-theme="dark"] {
+    background-image: url("/assets/images/icons/icon_sun.svg");
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+}
+
+.st-iconSun[data-theme="light"] {
+    background-image: url("/assets/images/icons/icon_night.svg");
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+}

@@ -11,14 +11,16 @@ import ReactDOM from "react-dom";
 
 import './css/app.css';
 import "./css/components/Navbar.scss";
-import "./css/styleManagement.css";
+import "./css/buttons.scss";
+import "./css/tools.scss";
+import "./css/styleManagement.scss";
 
 // start the Stimulus application
 import './bootstrap';
 import Navbar from './js/components/Navbar';
 import HomePage from './js/pages/HomePage';
 import {Switch, Route, BrowserRouter, withRouter} from "react-router-dom";
-import AllFruitsPage from './js/pages/AllFruitsPage';
+import AllFruitsPage from './js/pages/Fruits/AllFruitsPage';
 import NotFoundPage from './js/pages/NotFoundPage';
 import AllVegetablesPage from './js/pages/AllVegetablesPage';
 import ContactPage from './js/pages/ContactPage';
@@ -28,6 +30,7 @@ import authAPI from "./js/services/authAPI";
 import AuthContext from "./js/contexts/AuthContext";
 import ThemeContext from './js/contexts/ThemeContext';
 import userRequest from './js/services/userRequest';
+import ThemeColor from './js/components/ThemeColor';
 
 authAPI.setup();
 
@@ -64,6 +67,7 @@ const App = () => {
             <AuthContext.Provider value={contextValue}>
                 <BrowserRouter> 
                     <NavbarWithRouter/>
+                    <ThemeColor/>
                     <main className="st-principalContainer" data-theme={theme}>
                         <Switch>
                             <Route exact path="/fruits" component={AllFruitsPage}></Route>

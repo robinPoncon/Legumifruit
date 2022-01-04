@@ -1,0 +1,21 @@
+:root {
+    --background: white;
+    --primaryColor: #03A55A;
+    --primaryColor2: #36D88D;
+    --primaryColor3: #008C41;
+    --secondaryColor: #F0CBB7;
+    --secondaryColor2: #E18811;
+    --textColor: #282628;
+}
+
+[data-theme="dark"] {
+    --background: #282628;
+    --primaryColor: #36D88D;
+    --primaryColor2: #03A55A;
+    --primaryColor3: #008C41;
+    --secondaryColor: #8E8C8E;
+    --secondaryColor2: #E18811;
+    --greyMedium: #8E8C8E;
+    --greyLight: #C1BFC1;
+    --textColor: white;
+}
