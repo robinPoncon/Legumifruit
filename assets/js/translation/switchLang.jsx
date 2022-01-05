@@ -1,46 +1,33 @@
-import React, { ChangeEvent, useState, useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import Language from "./enums/Language";
+import React, {useState} from "react";
+import { useTranslation } from 'react-i18next';
+import { Language } from './enums/Language';
 import localeRequest from "../services/localeRequest";
-
-const Lang = () => {
+ 
+const SwitchLang = () => {
     const { i18n } = useTranslation();
-    const [locale, setLocale] = useState(i18n.language);
-    console.log(i18n);
-    useEffect(() => {
-        // if{
-        //     getUserInfos(state.loginCookie, state.idUser).then(res => {
-        //         let locale = res.data.locale.toLowerCase();
-        //         if (locale === "es") {
-        //             i18n.changeLanguage(Language.ES);
-        //             setLang(Language.ES);
-        //         }
-        //         else {
-        //             i18n.changeLanguage(Language.FR);
-        //             setLang(Language.FR);
-        //         }
-        //     }).catch(err => console.log(err));
-        // }
-        let locale = localeRequest.getLocaleUser();
-        if (locale === "en") {
-            i18n.changeLanguage(Language.EN);
-            setLocale(Language.EN);
-        }
-        else {
-            i18n.changeLanguage(Language.FR);
-            setLocale(Language.FR);
-        }
-    },);
+    const [locale, setLocale] = useState(localeRequest.getLocaleUser());
 
-    // const changeLanguage = (event) => {
-    //     let language = event.target.value;
-    //     setLocale(language);
-    // }
-
+    let changeLanguage = (event) => {
+        let language = event.target.value;
+ 
+        switch (language) {
+            case Language.EN:
+                setLocale(Language.EN);
+                i18n.changeLanguage(Language.EN);
+                break;
+            case Language.FR:
+            default:
+                setLocale(Language.FR);
+                i18n.changeLanguage(Language.FR);
+                break;
+        }
+        localeRequest.setLocaleUser(language);
+    }
+ 
     return (
         <div>
             <div>
-                <select value={locale} name="language" className="selectLanguage" onChange={changeLanguage}>
+                <select value={locale} name="language" onChange={changeLanguage}>
                     <option value={Language.FR}>FR</option>
                     <option value={Language.EN}>EN</option>
                 </select>
@@ -48,5 +35,5 @@ const Lang = () => {
         </div>
     )
 }
-
-export default Lang;
+ 
+export default SwitchLang;

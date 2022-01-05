@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import authAPI from "../services/authAPI";
 import themeColorRequest from "../services/themeColorRequest";
 import authContext from "../contexts/AuthContext";
-import Lang from "../translation/switchLang";
+import SwitchLang from "../translation/SwitchLang";
 
 const Navbar = ({history}) => {
 
@@ -26,7 +26,7 @@ const Navbar = ({history}) => {
                     <li><NavLink to="/contact">Contact</NavLink></li>
                 </ul>
             </div>
-            <Lang/>
+            <SwitchLang/>
             <div>
                 {!isAuthenticated ? 
                     <>

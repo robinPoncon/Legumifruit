@@ -21,6 +21,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@types/react": "^17.0.38",
+        "@types/react-native": "^0.66.11",
         "axios": "^0.24.0",
         "i18n": "^0.13.4",
         "i18next": "^21.6.5",

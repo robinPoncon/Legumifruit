@@ -6,14 +6,18 @@ import localeContext from "../contexts/LocaleContext";
 import themeColorRequest from '../services/themeColorRequest';
 import ShowingError from '../components/FormErrorManagement/ShowingError';
 import localeRequest from '../services/localeRequest';
+import { useTranslation } from 'react-i18next';
+import verificationsFront from "../components/FormErrorManagement/verificationsFront";
 
 const LoginPage = ({history}) => {
 
     const {setIsAuthenticated} = useContext(authContext);
     const {setTheme} = useContext(themeContext);
-    const {setLocale} = useContext(localeContext);
+    const {locale, setLocale} = useContext(localeContext);
     const [errorMessage, setErrorMessage] = useState(null);
     const [disabledBtn, setDisabledBtn] = useState(true);
+
+    const { t } = useTranslation();
 
     const [credentials, setCredentials] = useState({
         username: "",
@@ -24,16 +28,16 @@ const LoginPage = ({history}) => {
         let nameInput = event.currentTarget.name;
         let value = event.currentTarget.value;
 
-        setCredentials({...credentials, [nameInput]: value});
+        // setCredentials({...credentials, [nameInput]: value});
 
-        // let returnVerif = verificationsFront(event, t);
-        // setErrorMessage(returnVerif[0]);
-        // if (returnVerif[0] === null && value !== "") {
-        //     setCredentials({...credentials, [nameInput]: value});
-        // }
-        // else {
-        //     setCredentials({...credentials, [nameInput]: null});
-        // }
+        let returnVerif = verificationsFront(event, t);
+        setErrorMessage(returnVerif[0]);
+        if (returnVerif[0] === null && value !== "") {
+            setCredentials({...credentials, [nameInput]: value});
+        }
+        else {
+            setCredentials({...credentials, [nameInput]: null});
+        }
     }
 
     const handleSubmit = async(event) => {
