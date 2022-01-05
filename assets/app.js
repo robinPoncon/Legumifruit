@@ -26,7 +26,7 @@ import {Switch, Route, BrowserRouter, withRouter} from "react-router-dom";
 import AllFruitsPage from './js/pages/Fruits/AllFruitsPage';
 import NotFoundPage from './js/pages/NotFoundPage';
 import AllVegetablesPage from './js/pages/AllVegetablesPage';
-import ContactPage from './js/pages/ContactPage';
+import BlocPage from './js/pages/BlocPage';
 import RegistrationPage from './js/pages/RegistrationPage';
 import LoginPage from './js/pages/LoginPage';
 import authAPI from "./js/services/authAPI";
@@ -36,6 +36,7 @@ import themeColorRequest from './js/services/themeColorRequest';
 import ThemeColor from './js/components/ThemeColor';
 import localeRequest from "./js/services/localeRequest";
 import LocaleContext from './js/contexts/LocaleContext';
+import { useTranslation } from 'react-i18next';
 
 authAPI.setup();
 
@@ -62,8 +63,6 @@ const App = () => {
         setLocale: setLocale
     }
 
-    console.log(locale);
-
     return (
         <LocaleContext.Provider value ={contextLocaleValue}>
             <ThemeContext.Provider value={contextThemeValue}>
@@ -75,7 +74,7 @@ const App = () => {
                             <Switch>
                                 <Route exact path="/fruits" component={AllFruitsPage}></Route>
                                 <Route exact path="/vegetables" component={AllVegetablesPage}></Route>
-                                <Route exact path="/contact" component={ContactPage}></Route>
+                                <Route exact path="/blog" component={BlocPage}></Route>
                                 <Route exact path="/registration" component={RegistrationPage}></Route>
                                 <Route exact path="/login" component={LoginPage}/>
                                 <Route exact path="/" component={HomePage}></Route>

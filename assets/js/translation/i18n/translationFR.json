@@ -1,6 +1,13 @@
 {
-    "home": {
-        "hello": "Bonjour"
+    "nav": {
+        "blog": "Blog",
+        "fruits": "Fruits",
+        "registration": "Inscription",
+        "vegetables": "Légumes",
+        "login": "Connexion",
+        "logout": "Déconnexion",
+        "light-theme": "Thème clair",
+        "dark-theme": "Thème sombre"
     },
     "error-message": {
         "verif-email": "Veuillez renseigner une adresse mail valide.",
@@ -8,7 +15,19 @@
         "verif-siret": "Il semblerait que ce SIRET n’existe pas.",
         "verif-cifnif": "Il semblerait que ce CIF/NIF n’existe pas.",
         "verif-cardNumber": "Veuillez entrez un numéro de carte valide.",
-        "verif-iban": "Veuillez renseigner un iban valide",
-        "verif-atLeastOneNumber": "Le numéro de votre facture doit comporter au minimum un chiffre"
+        "verif-iban": "Veuillez renseigner un iban valide.",
+        "verif-atLeastOneNumber": "Ce champs doit comporter au moins 1 chiffre."
+    },
+    "homePage": {
+        "home": "Page d'accueil"
+    },
+    "fruitsPage": {
+        "allFruits": "Tous les fruits"
+    },
+    "vegetablesPage": {
+        "allVegetables": "Tous les légumes"
+    },
+    "notFoundPage": {
+        "error404": "Erreur 404 !"
     }
 }

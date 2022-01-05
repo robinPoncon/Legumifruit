@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useTranslation } from 'react-i18next';
 import { Language } from './enums/Language';
 import localeRequest from "../services/localeRequest";
@@ -23,6 +23,12 @@ const SwitchLang = () => {
         }
         localeRequest.setLocaleUser(language);
     }
+
+    useEffect(() => {
+        if (locale === "en") {
+            i18n.changeLanguage(Language.EN);
+        }
+    });
  
     return (
         <div>

@@ -6,8 +6,7 @@ const HomePage = (props) => {
     
     return ( 
         <article>
-            <h1>Page d'accueil</h1> 
-            <p>{t("home.hello")}</p>
+            <h1>{t("homePage.home")}</h1> 
         </article>
     );
 }

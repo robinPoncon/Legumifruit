@@ -1,19 +1,38 @@
 .st-navbarContainer {
     background-color: var(--secondaryColor);
+    height: 50px;
     justify-content: space-between;
     position: fixed;
     top: 0;
     width: 100%;
+    a {
+        color: var(--textColor);
+        font-weight: 600;
+        margin-left: 20px;
+        text-decoration: none;
+        &:hover {
+            color: var(--primaryColor);
+        }
+    }
 }
 
-.st-navigation {
+.st-navigationLeft {
+    margin-top: auto;
     ul {
         display: flex;
-        list-style:none;
-        margin-left:0;
-        padding-left:0;
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
     }
-    a {
-        text-decoration: none;
+    li {
+        margin-top: auto;
+        margin-bottom: auto;
     }
+}
+
+.st-navigationRight {
+    font-size: 18px;
+    margin-right: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
 }

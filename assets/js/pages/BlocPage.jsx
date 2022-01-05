@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const NotFoundPage = () => {
+const BlogPage = () => {
     const {t} = useTranslation();
 
-    return ( <h1>{t("notFoundPage.error404")}</h1> );
+    return ( <h1>{t("nav.blog")}</h1> );
 }
  
-export default NotFoundPage;
+export default BlogPage;

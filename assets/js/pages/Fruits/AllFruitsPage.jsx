@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const AllFruitsPage = (props) => {
-    return ( <h1>All fruits</h1> );
+    const {t} = useTranslation();
+
+    return ( <h1>{t("fruitsPage.allFruits")}</h1> );
 }
  
 export default AllFruitsPage;
