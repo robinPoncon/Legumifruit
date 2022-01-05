@@ -10,6 +10,7 @@
         "dark-theme": "Dark theme"
     },
     "error-message": {
+        "invalid-credentials": "Incorrect email and/or password",
         "verif-email": "Please enter a valid email address.",
         "verif-empty": "Please complete this field.",
         "verif-siret": "It seems that this SIRET does not exist.",

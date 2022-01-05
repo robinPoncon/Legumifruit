@@ -13,7 +13,7 @@ Return:
 const checkAllInputs = (state) => {
     let isEmptyInput = false;
     Object.keys(state).map((keyName) => {
-        if (state[keyName] === null) {
+        if (state[keyName] === null || state[keyName] === "") {
             isEmptyInput = true;
         }
         return isEmptyInput;

@@ -4,3 +4,9 @@ button {
     color: var(--textColor);
     font-weight: 600;
 }
+
+.disabled {
+    opacity: .4;
+    cursor: default;
+    pointer-events: none;
+}

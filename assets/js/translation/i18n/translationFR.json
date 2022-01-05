@@ -10,6 +10,7 @@
         "dark-theme": "Thème sombre"
     },
     "error-message": {
+        "invalid-credentials": "L'email et/ou le mot de passe sont incorrects",
         "verif-email": "Veuillez renseigner une adresse mail valide.",
         "verif-empty": "Veuillez remplir ce champ.",
         "verif-siret": "Il semblerait que ce SIRET n’existe pas.",

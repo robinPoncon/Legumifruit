@@ -34,6 +34,10 @@
     width: 105px;
 }
 
+body[data-locale="fr"][data-theme="light"] .st-blocTheme:hover .st-nameTheme {
+    width: 125px;
+}
+
 .st-iconSun[data-theme="dark"] {
     background-image: url("/assets/images/icons/icon_sun.svg");
     background-repeat: no-repeat;

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import authAPI from "../services/authAPI";
 import authContext from "../contexts/AuthContext";
 import themeContext from "../contexts/ThemeContext";
@@ -8,6 +8,7 @@ import ShowingError from '../components/FormErrorManagement/ShowingError';
 import localeRequest from '../services/localeRequest';
 import { useTranslation } from 'react-i18next';
 import verificationsFront from "../components/FormErrorManagement/verificationsFront";
+import checkAllInputs from '../components/FormErrorManagement/checkAllInputs';
 
 const LoginPage = ({history}) => {
 
@@ -16,32 +17,49 @@ const LoginPage = ({history}) => {
     const {locale, setLocale} = useContext(localeContext);
     const [errorMessage, setErrorMessage] = useState(null);
     const [disabledBtn, setDisabledBtn] = useState(true);
+    const [isSubmited, setIsSubmited] = useState(false);
 
     const { t } = useTranslation();
+
+    const [verifInputs, setVerifInputs] = useState({
+        username: "",
+        password: ""
+    });
 
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
     });
 
+    useEffect(() => {
+        if (isSubmited) {
+            setDisabledBtn(true);
+        }
+        else {
+            let isDisabledBtn = checkAllInputs(verifInputs);
+            setDisabledBtn(isDisabledBtn);
+        }   
+    });
+
     function handleChange(event) {
         let nameInput = event.currentTarget.name;
         let value = event.currentTarget.value;
-
-        // setCredentials({...credentials, [nameInput]: value});
+        setCredentials({...credentials, [nameInput]: value});
 
         let returnVerif = verificationsFront(event, t);
         setErrorMessage(returnVerif[0]);
+
         if (returnVerif[0] === null && value !== "") {
-            setCredentials({...credentials, [nameInput]: value});
+            setVerifInputs({...verifInputs, [nameInput]: value});
         }
         else {
-            setCredentials({...credentials, [nameInput]: null});
+            setVerifInputs({...verifInputs, [nameInput]: ""});
         }
     }
 
     const handleSubmit = async(event) => {
         event.preventDefault();
+        setIsSubmited(true);
 
         try {
             await authAPI.login(credentials);
@@ -55,7 +73,13 @@ const LoginPage = ({history}) => {
             history.replace("/");
         }
         catch(error) {
-            console.log(error.response);
+            let errorResponse = error.response.data.message;
+            let errorMessage;
+            if (errorResponse === "Invalid credentials.") {
+                errorMessage = t("error-message.invalid-credentials");
+            }
+            setErrorMessage(errorMessage);
+            setIsSubmited(false);
         }
     }
 
@@ -91,7 +115,7 @@ const LoginPage = ({history}) => {
                     />
                 </div>
                 <div className="form-group">
-                    <button>Connexion</button>
+                    <button className={"st-actionBtnGreen" + (disabledBtn ? " disabled" : "")}>Connexion</button>
                 </div>
             </form>
         </>
