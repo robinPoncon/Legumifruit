@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import userRequest from "../services/userRequest";
+import themeColorRequest from "../services/themeColorRequest";
 import themeContext from "../contexts/ThemeContext";
 import "../../css/components/ThemeColor.scss";
 
@@ -10,7 +10,7 @@ const ThemeColor = () => {
     const switchTheme = async() => {
         if (theme === "light") {
             try {
-                await userRequest.setThemeUser("dark");
+                await themeColorRequest.setThemeUser("dark");
                 setTheme("dark");
             }
             catch(error) {
@@ -19,7 +19,7 @@ const ThemeColor = () => {
         }
         else {
             try {
-                await userRequest.setThemeUser("light");
+                await themeColorRequest.setThemeUser("light");
                 setTheme("light");
             }
             catch(error) {
@@ -30,7 +30,7 @@ const ThemeColor = () => {
 
     return ( 
         <div className="d-flex cpointer st-blocTheme" onClick={switchTheme}>
-            <p className="st-iconSun" title="sun icon" data-theme={theme}/>
+            <p className="st-iconSun" data-theme={theme}/>
             <p className="st-nameTheme">{theme === "light" ? "Dark Theme" : "Light Theme"}</p>
         </div> 
     );

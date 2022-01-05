@@ -2,23 +2,38 @@ import React, {useContext, useState} from 'react';
 import authAPI from "../services/authAPI";
 import authContext from "../contexts/AuthContext";
 import themeContext from "../contexts/ThemeContext";
-import userRequest from '../services/userRequest';
+import localeContext from "../contexts/LocaleContext";
+import themeColorRequest from '../services/themeColorRequest';
+import ShowingError from '../components/FormErrorManagement/ShowingError';
+import localeRequest from '../services/localeRequest';
 
 const LoginPage = ({history}) => {
 
     const {setIsAuthenticated} = useContext(authContext);
     const {setTheme} = useContext(themeContext);
+    const {setLocale} = useContext(localeContext);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [disabledBtn, setDisabledBtn] = useState(true);
 
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
     });
 
-    const handleChange = (event) => {
-        const value = event.currentTarget.value;
-        const name = event.currentTarget.name;
+    function handleChange(event) {
+        let nameInput = event.currentTarget.name;
+        let value = event.currentTarget.value;
 
-        setCredentials({...credentials, [name]: value});
+        setCredentials({...credentials, [nameInput]: value});
+
+        // let returnVerif = verificationsFront(event, t);
+        // setErrorMessage(returnVerif[0]);
+        // if (returnVerif[0] === null && value !== "") {
+        //     setCredentials({...credentials, [nameInput]: value});
+        // }
+        // else {
+        //     setCredentials({...credentials, [nameInput]: null});
+        // }
     }
 
     const handleSubmit = async(event) => {
@@ -26,9 +41,12 @@ const LoginPage = ({history}) => {
 
         try {
             await authAPI.login(credentials);
-            const theme = await userRequest.getThemeUser();
+            const theme = await themeColorRequest.getThemeUser();
+            const locale = await localeRequest.getLocaleUser();
             setTheme(theme);
-            userRequest.setAppTheme(theme);
+            setLocale(locale);
+            themeColorRequest.setAppTheme(theme);
+            localeRequest.setAppLocale(locale);
             setIsAuthenticated(true);
             history.replace("/");
         }
@@ -40,6 +58,7 @@ const LoginPage = ({history}) => {
     return ( 
         <>
             <h1>Connexion</h1>
+            {errorMessage && <ShowingError message={errorMessage}/>}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">Adresse email</label>
@@ -51,6 +70,7 @@ const LoginPage = ({history}) => {
                         id="username" 
                         className="form-control"
                         onChange={handleChange}
+                        data-verif="verif-email"
                     />
                 </div>
                 <div className="form-group">
@@ -63,6 +83,7 @@ const LoginPage = ({history}) => {
                         id="password" 
                         className="form-control"
                         onChange={handleChange}
+                        data-verif="verif-empty"
                     />
                 </div>
                 <div className="form-group">

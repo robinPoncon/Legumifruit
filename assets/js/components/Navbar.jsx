@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import { NavLink } from 'react-router-dom';
 import authAPI from "../services/authAPI";
-import userRequest from "../services/userRequest";
+import themeColorRequest from "../services/themeColorRequest";
 import authContext from "../contexts/AuthContext";
+import Lang from "../translation/switchLang";
 
 const Navbar = ({history}) => {
 
@@ -10,7 +11,7 @@ const Navbar = ({history}) => {
 
     const handleLogout = () => {
         authAPI.logout();
-        userRequest.setAppTheme("light");
+        themeColorRequest.setAppTheme("light");
         setIsAuthenticated(false);
         history.push("/login");
     }
@@ -25,6 +26,7 @@ const Navbar = ({history}) => {
                     <li><NavLink to="/contact">Contact</NavLink></li>
                 </ul>
             </div>
+            <Lang/>
             <div>
                 {!isAuthenticated ? 
                     <>

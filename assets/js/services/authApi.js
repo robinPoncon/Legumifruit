@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 function logout() {
     window.localStorage.removeItem("authToken");
     window.localStorage.removeItem("userTheme");
+    window.localStorage.removeItem("userLocale");
     delete axios.defaults.headers["Authorization"];
 }
 
@@ -14,6 +15,7 @@ function login(credentials) {
     .then(token => {
         let jwtData = jwtDecode(token);
         window.localStorage.setItem("userTheme", jwtData.colorTheme);
+        window.localStorage.setItem("userLocale", jwtData.locale);
         window.localStorage.setItem("authToken", token);
         setAxiosToken(token);
     });

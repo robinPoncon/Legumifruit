@@ -13,10 +13,13 @@ import './css/app.css';
 import "./css/components/Navbar.scss";
 import "./css/buttons.scss";
 import "./css/tools.scss";
+import "./css/fontSizeTemplate.scss";
+import "./css/marginTemplate.scss";
 import "./css/styleManagement.scss";
 
 // start the Stimulus application
 import './bootstrap';
+import "./js/translation/i18n";
 import Navbar from './js/components/Navbar';
 import HomePage from './js/pages/HomePage';
 import {Switch, Route, BrowserRouter, withRouter} from "react-router-dom";
@@ -29,15 +32,18 @@ import LoginPage from './js/pages/LoginPage';
 import authAPI from "./js/services/authAPI";
 import AuthContext from "./js/contexts/AuthContext";
 import ThemeContext from './js/contexts/ThemeContext';
-import userRequest from './js/services/userRequest';
+import themeColorRequest from './js/services/themeColorRequest';
 import ThemeColor from './js/components/ThemeColor';
+import localeRequest from "./js/services/localeRequest";
+import LocaleContext from './js/contexts/LocaleContext';
 
 authAPI.setup();
 
 const App = () => {
 
     const [isAuthenticated, setIsAuthenticated] = useState(authAPI.isAuthenticated());
-    const [theme, setTheme] = useState(userRequest.getThemeUser());
+    const [theme, setTheme] = useState(themeColorRequest.getThemeUser());
+    const [locale, setLocale] = useState(localeRequest.getLocaleUser());
 
     const NavbarWithRouter = withRouter(Navbar);
 
@@ -51,37 +57,35 @@ const App = () => {
         setTheme: setTheme
     }
 
-    // const switchTheme = () => {
-    //     if (theme === "light") {
-    //         setTheme("dark");
-    //     }
-    //     else {
-    //         setTheme("light");
-    //     }
-    // }
+    const contextLocaleValue = {
+        locale: locale,
+        setLocale: setLocale
+    }
 
-    console.log(theme);
+    console.log(locale);
 
     return (
-        <ThemeContext.Provider value={contextThemeValue}>
-            <AuthContext.Provider value={contextValue}>
-                <BrowserRouter> 
-                    <NavbarWithRouter/>
-                    <ThemeColor/>
-                    <main className="st-principalContainer" data-theme={theme}>
-                        <Switch>
-                            <Route exact path="/fruits" component={AllFruitsPage}></Route>
-                            <Route exact path="/vegetables" component={AllVegetablesPage}></Route>
-                            <Route exact path="/contact" component={ContactPage}></Route>
-                            <Route exact path="/registration" component={RegistrationPage}></Route>
-                            <Route exact path="/login" component={LoginPage}/>
-                            <Route exact path="/" component={HomePage}></Route>
-                            <Route path="*" component={NotFoundPage}></Route>
-                        </Switch>
-                    </main>
-                </BrowserRouter>
-            </AuthContext.Provider>
-        </ThemeContext.Provider>
+        <LocaleContext.Provider value ={contextLocaleValue}>
+            <ThemeContext.Provider value={contextThemeValue}>
+                <AuthContext.Provider value={contextValue}>
+                    <BrowserRouter> 
+                        <NavbarWithRouter/>
+                        <ThemeColor/>
+                        <main className="st-principalContainer" data-theme={theme}>
+                            <Switch>
+                                <Route exact path="/fruits" component={AllFruitsPage}></Route>
+                                <Route exact path="/vegetables" component={AllVegetablesPage}></Route>
+                                <Route exact path="/contact" component={ContactPage}></Route>
+                                <Route exact path="/registration" component={RegistrationPage}></Route>
+                                <Route exact path="/login" component={LoginPage}/>
+                                <Route exact path="/" component={HomePage}></Route>
+                                <Route path="*" component={NotFoundPage}></Route>
+                            </Switch>
+                        </main>
+                    </BrowserRouter>
+                </AuthContext.Provider>
+            </ThemeContext.Provider>
+        </LocaleContext.Provider>
     )
 }
 

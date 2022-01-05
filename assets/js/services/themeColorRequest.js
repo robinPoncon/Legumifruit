@@ -15,15 +15,17 @@ function getThemeUser() {
 
 function setThemeUser(theme) {
     const token = window.localStorage.getItem("authToken");
-    const jwtData = jwtDecode(token);
-    const userId = jwtData.id;
+    let userId;
+    window.localStorage.setItem("userTheme", theme);
 
-    return axios
-    .put("https://localhost:8000/api/users/" + userId, {colorTheme: theme})
-    .then(userData => {
-        let userTheme = userData.data.colorTheme;
-        window.localStorage.setItem("userTheme", userTheme);
-    });
+    if (token) {
+        const jwtData = jwtDecode(token);
+        userId = jwtData.id;
+    }
+
+    if (userId) {
+        return axios.put("https://localhost:8000/api/users/" + userId, {colorTheme: theme});   
+    }
 }
 
 function setAppTheme(theme) {
