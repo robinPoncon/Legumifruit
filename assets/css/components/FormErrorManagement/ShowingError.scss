@@ -1,13 +1,14 @@
 .st-blocFormError {
     background-color: #FFABBB;
     border-radius: 6px;
+    color: #282628;
     display: flex;
     flex-direction: row;
     font-size: 12px;
     height: 38px;
     justify-content: space-between;
-    margin-bottom: 30px;
-    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     width: 600px;
     & p:nth-child(1) {
         margin-left: 20px;

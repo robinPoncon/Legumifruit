@@ -28,6 +28,14 @@
     "vegetablesPage": {
         "allVegetables": "All vegetables"
     },
+    "loginPage": {
+        "mail-address": "Email address",
+        "password": "Password"
+    },
+    "registrationPage": {
+        "first-name": "Firstname",
+        "last-name": "Lastname"
+    },
     "notFoundPage": {
         "error404": "404 error !"
     }

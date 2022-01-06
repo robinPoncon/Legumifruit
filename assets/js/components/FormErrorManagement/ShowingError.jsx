@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "../../../css/components/FormErrorManagement/ShowingError.scss";
+import iconClose from "../../../images/icons/icon_close.svg";
 
 /*
 Props:
@@ -21,7 +22,7 @@ const ShowingError = (props) => {
             <div className="fs12 st-blocFormError mt10" style={props.width ? {width : props.width} : null }>
                 <p>{props.message}</p>
                 <p onClick={hideComponent}>
-                    <img src="/assets/icons/icon_cross_darkGreen.svg" alt="icon close"/>
+                    <img src={iconClose} alt="icon close"/>
                 </p>
             </div> : null }
         </>

@@ -14,7 +14,7 @@ const LoginPage = ({history}) => {
 
     const {setIsAuthenticated} = useContext(authContext);
     const {setTheme} = useContext(themeContext);
-    const {locale, setLocale} = useContext(localeContext);
+    const {setLocale} = useContext(localeContext);
     const [errorMessage, setErrorMessage] = useState(null);
     const [disabledBtn, setDisabledBtn] = useState(true);
     const [isSubmited, setIsSubmited] = useState(false);
@@ -39,7 +39,7 @@ const LoginPage = ({history}) => {
             let isDisabledBtn = checkAllInputs(verifInputs);
             setDisabledBtn(isDisabledBtn);
         }   
-    });
+    }, [verifInputs, isSubmited, disabledBtn]);
 
     function handleChange(event) {
         let nameInput = event.currentTarget.name;
@@ -86,14 +86,16 @@ const LoginPage = ({history}) => {
     return ( 
         <>
             <h1>Connexion</h1>
+
             {errorMessage && <ShowingError message={errorMessage}/>}
+
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="username">Adresse email</label>
+                <div className={"form-group mb10 " + (!errorMessage ? "mt20" : "")}>
+                    <label className="required" htmlFor="username">{t("loginPage.mail-address")}</label>
                     <input 
                         type="email" 
                         value={credentials.username}
-                        placeholder="Adresse email de connexion" 
+                        placeholder="test@gmail.com" 
                         name="username" 
                         id="username" 
                         className="form-control"
@@ -102,11 +104,11 @@ const LoginPage = ({history}) => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Mot de passe</label>
+                    <label className="required" htmlFor="password">{t("loginPage.password")}</label>
                     <input 
                         type="password" 
                         value={credentials.password}
-                        placeholder="Mot de passe" 
+                        placeholder={t("loginPage.password")} 
                         name="password" 
                         id="password" 
                         className="form-control"
@@ -114,8 +116,8 @@ const LoginPage = ({history}) => {
                         data-verif="verif-empty"
                     />
                 </div>
-                <div className="form-group">
-                    <button className={"st-actionBtnGreen" + (disabledBtn ? " disabled" : "")}>Connexion</button>
+                <div className="form-group mt30">
+                    <button className={"st-actionBtn2 " + (disabledBtn ? "disabled" : "")}>{t("nav.login")}</button>
                 </div>
             </form>
         </>

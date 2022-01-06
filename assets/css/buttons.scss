@@ -7,6 +7,55 @@ button {
 
 .disabled {
     opacity: .4;
-    cursor: default;
     pointer-events: none;
+}
+
+.st-actionBtn {
+    background-color: transparent;
+    border: 2px solid var(--primaryColor);
+    border-radius: 6px;
+    padding: 5px 15px;
+    color: var(--textColor);
+    transition: background-color 0.5s;
+    &:hover {
+        background-color: var(--primaryColor);
+    }
+}
+
+.st-actionBtn2 {
+    border: 2px solid var(--primaryColor);
+    border-radius: 6px;
+    color: var(--textColor);
+    display: inline-block;
+    overflow: hidden;
+    padding: 5px 15px;
+    position: relative;
+    transition: all .5s;
+    z-index: 1;
+    &:after {
+        background-color: transparent;
+        bottom: 0;
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        z-index: -2;
+    }
+    &:before {
+        background-color: var(--primaryColor);
+        bottom: 0;
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        transition: all .5s;
+        width: 0%;
+        z-index: -1;
+    }
+    &:hover {
+        &:before {
+            width: 100%;
+        }
+    }   
 }
