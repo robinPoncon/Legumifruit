@@ -10,6 +10,8 @@
         "dark-theme": "Dark theme"
     },
     "error-message": {
+        "already-email": "The email address you entered is already in use.",
+        "already-pseudo": "The pseudonyme you entered already exists.",
         "invalid-credentials": "Incorrect email and/or password",
         "verif-email": "Please enter a valid email address.",
         "verif-empty": "Please complete this field.",

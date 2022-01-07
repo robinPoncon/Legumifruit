@@ -69,9 +69,15 @@ const RegistrationPage = ({history}) => {
             history.replace("/login");
         }
         catch(error) {
-            //let errorResponse = error.response.data.message;
-            console.log(error);
-            //setErrorMessage(errorMessage);
+            let errorMessage;
+            let errorResponse = error.response.data.violations[0].message;
+            if (errorResponse === "The email address you entered is already in use.") {
+                errorMessage = t("error-message.already-email");
+            }
+            else if (errorResponse === "The pseudonyme you entered already exists.") {
+                errorMessage = t("error-message.already-pseudo");
+            }
+            setErrorMessage(errorMessage);
             setIsSubmited(false);
         }
     }

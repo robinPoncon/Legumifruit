@@ -4,23 +4,35 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FruitRepository;
+use App\Controller\UploadImageController;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=FruitRepository::class)
+ * @Vich\Uploadable
  * @UniqueEntity(
- *  fields={"name_en, name_fr"},
+ *  fields={"nameEN", "nameFR"},
  *  message="The name of the fruit you entered already exists."
  * )
  * @ApiResource(
  *      normalizationContext={
  *          "groups"={"fruit_read"}
- *      }
+ *      },
+ *      collectionOperations={
+ *          "image"={
+ *              "method"="POST",
+ *              "path"="/fruits/{id}",
+ *              "deserialize"=false,
+ *              "controller"=UploadImageController::class,
+ *          }
+ *       }
  * )
  */
 class Fruit
@@ -38,13 +50,13 @@ class Fruit
      * @Assert\NotBlank(message="This field cannot be empty.")
      * @Groups({"fruit_read"})
      */
-    private $name_en;
+    private $nameEN;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"fruit_read"})
      */
-    private $description_en;
+    private $descriptionEN;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -68,13 +80,35 @@ class Fruit
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Groups({"fruit_read"})
      */
-    private $name_fr;
+    private $nameFR;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"fruit_read"})
      */
-    private $description_fr;
+    private $descriptionFR;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="fruit_image", fileNameProperty="filePath")
+     */
+    private $file;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $filePath;
+
+    /**
+     * @var string|null
+     * @Groups({"fruit_read"})
+     */
+    private $fileUrl;
 
     public function __construct()
     {
@@ -87,26 +121,26 @@ class Fruit
         return $this->id;
     }
 
-    public function getNameEn(): ?string
+    public function getNameEN(): ?string
     {
-        return $this->name_en;
+        return $this->nameEN;
     }
 
-    public function setNameEn(string $name_en): self
+    public function setNameEN(string $nameEN): self
     {
-        $this->name_en = $name_en;
+        $this->nameEN = $nameEN;
 
         return $this;
     }
 
     public function getDescriptionEn(): ?string
     {
-        return $this->description_en;
+        return $this->descriptionEN;
     }
 
-    public function setDescriptionEn(?string $description_en): self
+    public function setDescriptionEn(?string $descriptionEN): self
     {
-        $this->description_en = $description_en;
+        $this->descriptionEN = $descriptionEN;
 
         return $this;
     }
@@ -174,26 +208,73 @@ class Fruit
         return $this;
     }
 
-    public function getNameFr(): ?string
+    public function getNameFR(): ?string
     {
-        return $this->name_fr;
+        return $this->nameFR;
     }
 
-    public function setNameFr(?string $name_fr): self
+    public function setNameFR(?string $nameFR): self
     {
-        $this->name_fr = $name_fr;
+        $this->nameFR = $nameFR;
 
         return $this;
     }
 
     public function getDescriptionFr(): ?string
     {
-        return $this->description_fr;
+        return $this->descriptionFR;
     }
 
-    public function setDescriptionFr(?string $description_fr): self
+    public function setDescriptionFr(?string $descriptionFR): self
     {
-        $this->description_fr = $description_fr;
+        $this->descriptionFR = $descriptionFR;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    public function setFilePath(?string $filePath): self
+    {
+        $this->filePath = $filePath;
+
+        return $this;
+    }
+
+    public function getFile(): ?File 
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file): Fruit
+    {
+        $this->file = $file;
+        return $this;
+    }
+
+    public function getFileUrl()
+    {
+        return $this->fileUrl;
+    }
+
+    public function setFileUrl($fileUrl)
+    {
+        $this->fileUrl = $fileUrl;
 
         return $this;
     }
