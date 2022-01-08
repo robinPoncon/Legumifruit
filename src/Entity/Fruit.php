@@ -26,6 +26,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *          "groups"={"fruit_read"}
  *      },
  *      collectionOperations={
+ *          "get",
  *          "image"={
  *              "method"="POST",
  *              "path"="/fruits/{id}",
