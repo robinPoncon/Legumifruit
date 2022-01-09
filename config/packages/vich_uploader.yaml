@@ -4,5 +4,5 @@ vich_uploader:
     mappings:
         fruit_image:
             uri_prefix: /images/fruits
-            upload_destination: '%kernel.project_dir%/assets/images/fruits'
+            upload_destination: '%kernel.project_dir%/public/images/fruits'
             namer: Vich\UploaderBundle\Naming\OrignameNamer

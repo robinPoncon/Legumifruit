@@ -38,7 +38,7 @@ class Calendar
      * @Assert\NotBlank(message="This field cannot be empty.")
      * @Groups({"calendar_read"})
      */
-    private $name;
+    private $nameEN;
 
     /**
      * @ORM\ManyToMany(targetEntity=Vegetable::class, mappedBy="calendar")
@@ -52,6 +52,12 @@ class Calendar
      */
     private $fruits;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"calendar_read"})
+     */
+    private $nameFR;
+
     public function __construct()
     {
         $this->vegetables = new ArrayCollection();
@@ -63,14 +69,14 @@ class Calendar
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameEN(): ?string
     {
-        return $this->name;
+        return $this->nameEN;
     }
 
-    public function setName(string $name): self
+    public function setNameEN(string $nameEN): self
     {
-        $this->name = $name;
+        $this->nameEN = $nameEN;
 
         return $this;
     }
@@ -125,6 +131,18 @@ class Calendar
         if ($this->fruits->removeElement($fruit)) {
             $fruit->removeCalendar($this);
         }
+
+        return $this;
+    }
+
+    public function getNameFR(): ?string
+    {
+        return $this->nameFR;
+    }
+
+    public function setNameFR(?string $nameFR): self
+    {
+        $this->nameFR = $nameFR;
 
         return $this;
     }

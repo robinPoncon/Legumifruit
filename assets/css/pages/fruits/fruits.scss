@@ -1,0 +1,50 @@
+.st-fruits {
+    text-align: center;
+    h1{
+        font-style: italic;
+        font-weight: 600;
+        margin-bottom: 100px;
+        margin-right: 20px;
+    }
+    img {
+        border-radius: 6px;
+        box-shadow: 0px 0px 10px var(--textColor);
+        height: 200px;
+        width: 250px;
+    }
+    .st-describeFruit {
+        justify-content: center;
+        width: 575px;
+        p {
+            text-align: justify;
+        }
+    }
+    .st-months {
+        color: var(--primaryColor);
+        margin-top: 2px;
+    }
+}
+
+body[data-theme="dark"] .st-iconEdit {
+    background-image: url("/assets/images/icons/icon_editDark.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 30px;
+    margin-top: 10px;
+    width: 30px;
+    &:hover {
+        background-image: url("/assets/images/icons/icon_editDark-hover.svg");
+    }
+}
+
+body[data-theme="light"] .st-iconEdit {
+    background-image: url("/assets/images/icons/icon_editLight.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 30px;
+    margin-top: 10px;
+    width: 30px;
+    &:hover {
+        background-image: url("/assets/images/icons/icon_editLight-hover.svg");
+    }
+}
