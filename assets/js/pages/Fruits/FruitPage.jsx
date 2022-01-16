@@ -5,7 +5,7 @@ import fruitRequest from '../../services/fruitRequest';
 import "../../../css/pages/fruits/fruits.scss";
 import calendarRequest from '../../services/calendarRequest';
 
-const FruitPage = (props) => {
+const FruitPage = ({history}) => {
     
     const {locale} = useContext(LocaleContext);
 
@@ -36,13 +36,18 @@ const FruitPage = (props) => {
         .catch(error => console.log(error));
     }, []);
 
+    const handleClick = () => {
+        console.log(id);
+        history.push("/fruits/" + id + "/modifier");
+    }
+
     console.log(months);
 
     return ( 
         <div className="st-fruits">
             <div className="d-flex justify-content-center">
                 <h1>{locale === "en" ? fruit.nameEN : fruit.nameFR}</h1>
-                <p className="st-iconEdit"></p>
+                <p className="st-iconEdit" onClick={handleClick}></p>
             </div>
             <div className="d-flex justify-content-center">
                 {fruit.fileUrl && <img src={fruit.fileUrl} alt={"image " + fruit.nameFR}/>}

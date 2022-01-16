@@ -38,6 +38,7 @@ import localeRequest from "./js/services/localeRequest";
 import LocaleContext from './js/contexts/LocaleContext';
 import { useTranslation } from 'react-i18next';
 import FruitPage from './js/pages/Fruits/FruitPage';
+import EditFruitPage from './js/pages/Fruits/EditFruitPage';
 
 authAPI.setup();
 
@@ -73,6 +74,7 @@ const App = () => {
                         <ThemeColor/>
                         <main className="st-principalContainer" data-theme={theme}>
                             <Switch>
+                                <Route path="/fruits/:id/modifier" component={EditFruitPage}></Route>
                                 <Route path="/fruits/:id" component={FruitPage}></Route>
                                 <Route exact path="/fruits" component={AllFruitsPage}></Route>
                                 <Route exact path="/vegetables" component={AllVegetablesPage}></Route>

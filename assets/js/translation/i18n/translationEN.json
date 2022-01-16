@@ -1,13 +1,14 @@
 {
     "nav": {
         "blog": "Blog",
+        "dark-theme": "Dark theme",
         "fruits": "Fruits",
-        "registration": "Registration",
-        "vegetables": "Vegetables",
         "login": "Login",
         "logout": "Logout",
         "light-theme": "Light theme",
-        "dark-theme": "Dark theme"
+        "registration": "Registration",
+        "update": "Update",
+        "vegetables": "Vegetables"
     },
     "error-message": {
         "already-email": "The email address you entered is already in use.",
@@ -25,7 +26,11 @@
         "home": "Home"
     },
     "fruitsPage": {
-        "allFruits": "All fruits"
+        "allFruits": "All fruits",
+        "fruit-description": "Fruit description",
+        "fruit-image": "Fruit image",
+        "fruit-name": "Fruit name",
+        "the-fruit": "the fruit"
     },
     "vegetablesPage": {
         "allVegetables": "All vegetables"
