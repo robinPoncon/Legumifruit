@@ -37,7 +37,6 @@ const FruitPage = ({history}) => {
     }, []);
 
     const handleClick = () => {
-        console.log(id);
         history.push("/fruits/" + id + "/modifier");
     }
 

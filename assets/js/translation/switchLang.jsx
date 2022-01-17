@@ -26,6 +26,7 @@ const SwitchLang = () => {
                 break;
         }
         localeRequest.setLocaleUser(language);
+        location.reload();
     }
 
     useEffect(() => {

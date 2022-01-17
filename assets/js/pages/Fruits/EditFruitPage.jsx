@@ -5,7 +5,9 @@ import checkAllInputs from '../../components/FormErrorManagement/checkAllInputs'
 import ShowingError from '../../components/FormErrorManagement/ShowingError';
 import verificationsFront from '../../components/FormErrorManagement/verificationsFront';
 import LocaleContext from '../../contexts/LocaleContext';
+import calendarRequest from '../../services/calendarRequest';
 import fruitRequest from '../../services/fruitRequest';
+import localeRequest from '../../services/localeRequest';
 
 const EditFruitPage = ({history}) => {
 
@@ -20,6 +22,8 @@ const EditFruitPage = ({history}) => {
     const [fileToSent, setFileToSent] = useState(null);
 
     const [verifInputs, setVerifInputs] = useState({});
+    const [allMonths, setAllMonths] = useState([]);
+    const [monthsExist, setMonthsExist] = useState([]);
 
     // if (locale === "en") {
     //     setVerifInputs({
@@ -39,6 +43,7 @@ const EditFruitPage = ({history}) => {
         descriptionEN: "",
         nameFR: "",
         descriptionFR: "",
+        monthsSelected: []
     });
 
     useEffect(() => {
@@ -59,7 +64,8 @@ const EditFruitPage = ({history}) => {
                 nameEN: data.nameEN,
                 descriptionEN: data.descriptionEN,
                 nameFR: data.nameFR,
-                descriptionFR: data.descriptionFR
+                descriptionFR: data.descriptionFR,
+                monthsSelected: data.calendar
             });
             setUrlImg(data.fileUrl);
             if (locale === "en") {
@@ -68,8 +74,22 @@ const EditFruitPage = ({history}) => {
             else {
                 setNameFruit(response.data.nameFR);
             }
+            let arrayCalendar = data.calendar;
+            let newCalendar = [];
+            console.log(arrayCalendar);
+            arrayCalendar.forEach(month => {
+                newCalendar.push(Number(month.match(/\d+/)[0]));
+            })
+            setMonthsExist(newCalendar);
+
+            calendarRequest.getAllCalendars()
+            .then(response => {
+                setAllMonths(response.data);
+            })
+            .catch(error => console.log(error));
         })
         .catch(error => console.log(error));
+
     }, []);
 
     const handleChange = (event) => {
@@ -95,16 +115,45 @@ const EditFruitPage = ({history}) => {
         console.log(fileUpload);
     }
 
+    const onChangeCheckbox = (event) => {
+        let isChecked = event.currentTarget.checked;
+        let id = event.currentTarget.id;
+        if (isChecked) {
+            let arrayMonth = allInputs.monthsSelected;
+            arrayMonth.push("/api/calendars/" + id);
+            setAllInputs({...allInputs, monthsSelected: arrayMonth});
+        }
+        else {
+            let newArray = allInputs.monthsSelected;
+            let index = newArray.indexOf("/api/calendars/" + id);
+            if (index !== -1) {
+                newArray.splice(index, 1);
+            }
+            setAllInputs({...allInputs, monthsSelected: newArray});
+        }
+        console.log(allInputs.monthsSelected);
+    }
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         setIsSubmited(true);
+        console.log("test");
+
+        let targetLang = locale === "en" ? "FR" : "EN"; 
         
         try {
+            await localeRequest.translateDeepL(targetLang, allInputs.nameFR);
             await fruitRequest.updateFruit(id, allInputs);
             await fruitRequest.updateImgFruit(id, fileToSent);
-            history.push("/fruits/");
+            //history.push("/fruits/");
         } catch (error) {
+            let errorMessage = error.response.data.title;
+            if (errorMessage === "An error occurred") {
+                errorMessage = t("error-message.fruit-name");
+            }
+            setErrorMessage(errorMessage);
             setIsSubmited(false);
+            window.scrollTo(0, 0);
         }
     }
 
@@ -185,6 +234,20 @@ const EditFruitPage = ({history}) => {
                         id="fileFruit"
                     />
                 </div>
+
+                {allMonths.map(month => (
+                    <div key={month.id} className="d-flex">
+                        <label htmlFor={month.id}>{locale === "en" ? month.nameEN : month.nameFR}</label>
+                        <input 
+                            id={month.id} 
+                            type="checkbox" 
+                            onChange={onChangeCheckbox} 
+                            defaultChecked={
+                                monthsExist.indexOf(month.id) === -1 ? false : true
+                            }
+                        />
+                    </div>
+                ))}
                 
                 <div className="form-group mt30">
                     <button className={"st-actionBtn2 " + (disabledBtn ? "disabled" : "")}>{t("nav.update")}</button>

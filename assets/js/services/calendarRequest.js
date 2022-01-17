@@ -5,6 +5,12 @@ function getCalendar(id) {
     .get("https://localhost:8000/api/calendars/" + id);
 }
 
+function getAllCalendars() {
+    return axios
+    .get("https://localhost:8000/api/calendars");
+}
+
 export default {
-    getCalendar
+    getCalendar,
+    getAllCalendars
 }
