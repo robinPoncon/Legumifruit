@@ -7,7 +7,7 @@ import verificationsFront from '../../components/FormErrorManagement/verificatio
 import LocaleContext from '../../contexts/LocaleContext';
 import fruitRequest from '../../services/fruitRequest';
 
-const EditFruitPage = (props) => {
+const EditFruitPage = ({history}) => {
 
     const [nameFruit, setNameFruit] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
@@ -16,6 +16,8 @@ const EditFruitPage = (props) => {
     const { t } = useTranslation();
     const {id} = useParams();
     const {locale} = useContext(LocaleContext);
+    const [urlImg, setUrlImg] = useState(null);
+    const [fileToSent, setFileToSent] = useState(null);
 
     const [verifInputs, setVerifInputs] = useState({});
 
@@ -37,7 +39,6 @@ const EditFruitPage = (props) => {
         descriptionEN: "",
         nameFR: "",
         descriptionFR: "",
-        file: ""
     });
 
     useEffect(() => {
@@ -55,11 +56,12 @@ const EditFruitPage = (props) => {
         .then(response => {
             let data = response.data;
             setAllInputs({...allInputs, 
-                nameEn: data.nameEN,
+                nameEN: data.nameEN,
                 descriptionEN: data.descriptionEN,
-                nameFR: data.descriptionFR,
+                nameFR: data.nameFR,
                 descriptionFR: data.descriptionFR
             });
+            setUrlImg(data.fileUrl);
             if (locale === "en") {
                 setNameFruit(response.data.nameEN);
             }
@@ -87,14 +89,27 @@ const EditFruitPage = (props) => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleChangeFile = (event) => {
+        let fileUpload = event.currentTarget.files[0];
+        setFileToSent(fileUpload);
+        console.log(fileUpload);
+    }
+
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        setAllInputs({...allInputs, nameEN: "test"});
-        console.log(allInputs);
+        setIsSubmited(true);
+        
+        try {
+            await fruitRequest.updateFruit(id, allInputs);
+            await fruitRequest.updateImgFruit(id, fileToSent);
+            history.push("/fruits/");
+        } catch (error) {
+            setIsSubmited(false);
+        }
     }
 
     return ( 
-        <>
+        <div className="st-fruitsEdit">
 
             <h1>{t("nav.update") + " " + t("fruitsPage.the-fruit") + " - " + nameFruit}</h1>
 
@@ -103,8 +118,8 @@ const EditFruitPage = (props) => {
             <form onSubmit={handleSubmit}>
                 {locale === "en" ? 
                 <>
-                    <div className={"form-group mb10 " + (!errorMessage ? "mt20" : "")}>
-                        <label className="required">{t("fruitsPage.fruit-name")}</label>
+                    <div className={"form-group mb20 " + (!errorMessage ? "mt20" : "")}>
+                        <label className="required mb10">{t("fruitsPage.fruit-name")}</label>
                         <input 
                             type="text" 
                             value={allInputs.nameEN}
@@ -116,8 +131,8 @@ const EditFruitPage = (props) => {
                         />
                     </div>
 
-                    <div className={"form-group mb10"}>
-                        <label className="required">{t("fruitsPage.fruit-description")}</label>
+                    <div className={"form-group mb20"}>
+                        <label className="required mb10">{t("fruitsPage.fruit-description")}</label>
                         <textarea 
                             value={allInputs.descriptionEN}
                             placeholder="The pineapple is a species of xerophytic plant, native to South America..." 
@@ -130,8 +145,8 @@ const EditFruitPage = (props) => {
                 </>
                 :
                 <>
-                    <div className={"form-group mb10 " + (!errorMessage ? "mt20" : "")}>
-                        <label className="required">{t("fruitsPage.fruit-name")}</label>
+                    <div className={"form-group mb20 " + (!errorMessage ? "mt20" : "")}>
+                        <label className="required mb10">{t("fruitsPage.fruit-name")}</label>
                         <input 
                             type="text" 
                             value={allInputs.nameFR}
@@ -143,8 +158,8 @@ const EditFruitPage = (props) => {
                         />
                     </div>
 
-                    <div className={"form-group mb10"}>
-                        <label className="required">{t("fruitsPage.fruit-description")}</label>
+                    <div className={"form-group mb20"}>
+                        <label className="required mb10">{t("fruitsPage.fruit-description")}</label>
                         <textarea 
                             value={allInputs.descriptionFR}
                             placeholder="L'ananas est une espèce de plantes xérophytes, originaire d'Amérique du Sud..." 
@@ -157,14 +172,17 @@ const EditFruitPage = (props) => {
                 </>
                 }
 
-                <div className={"form-group mb10 " + (!errorMessage ? "mt20" : "")}>
-                    <label className="required">{t("fruitsPage.fruit-image")}</label>
+                <div className={"form-group mb20 " + (!errorMessage ? "mt20" : "")}>
+                    <label className="required mb10" htmlFor="fileFruit">{t("fruitsPage.fruit-image")}</label>
+                    <p>{urlImg && <img src={urlImg} alt={t("fruitsPage.fruit-image")} width="250px" height="200px"></img>}</p>
                     <input 
                         type="file" 
                         value={allInputs.file}
                         name="file" 
-                        className="form-control"
-                        onChange={handleChange}
+                        className="form-control st-fileInput"
+                        onChange={handleChangeFile}
+                        accept="image/jpeg, image/png"
+                        id="fileFruit"
                     />
                 </div>
                 
@@ -172,7 +190,7 @@ const EditFruitPage = (props) => {
                     <button className={"st-actionBtn2 " + (disabledBtn ? "disabled" : "")}>{t("nav.update")}</button>
                 </div>
             </form>
-        </> 
+        </div> 
     );
 }
  

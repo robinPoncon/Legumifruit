@@ -27,9 +27,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *      },
  *      collectionOperations={
  *          "get",
+ *          "post",
  *          "image"={
  *              "method"="POST",
- *              "path"="/fruits/{id}",
+ *              "path"="/fruits/{id}/image",
  *              "deserialize"=false,
  *              "controller"=UploadImageController::class,
  *          }

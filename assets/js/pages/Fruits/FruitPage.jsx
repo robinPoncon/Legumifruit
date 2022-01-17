@@ -41,6 +41,11 @@ const FruitPage = ({history}) => {
         history.push("/fruits/" + id + "/modifier");
     }
 
+    const handleDelete = async() => {
+        await fruitRequest.deleteFruit(id);
+        history.replace("/fruits");
+    }
+
     console.log(months);
 
     return ( 
@@ -48,6 +53,7 @@ const FruitPage = ({history}) => {
             <div className="d-flex justify-content-center">
                 <h1>{locale === "en" ? fruit.nameEN : fruit.nameFR}</h1>
                 <p className="st-iconEdit" onClick={handleClick}></p>
+                <p className="st-iconDelete ml10" onClick={handleDelete}></p>
             </div>
             <div className="d-flex justify-content-center">
                 {fruit.fileUrl && <img src={fruit.fileUrl} alt={"image " + fruit.nameFR}/>}

@@ -25,6 +25,15 @@
     }
 }
 
+.st-fruitsEdit {
+    textarea {
+        min-height: 100px;
+    }
+    .st-fileInput {
+        width: 350px;
+    }
+}
+
 body[data-theme="dark"] .st-iconEdit {
     background-image: url("/assets/images/icons/icon_editDark.svg");
     background-repeat: no-repeat;
@@ -46,5 +55,29 @@ body[data-theme="light"] .st-iconEdit {
     width: 30px;
     &:hover {
         background-image: url("/assets/images/icons/icon_editLight-hover.svg");
+    }
+}
+
+body[data-theme="dark"] .st-iconDelete {
+    background-image: url("/assets/images/icons/icon_deleteDark.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 30px;
+    margin-top: 10px;
+    width: 30px;
+    &:hover {
+        background-image: url("/assets/images/icons/icon_deleteDark-hover.svg");
+    }
+}
+
+body[data-theme="light"] .st-iconDelete {
+    background-image: url("/assets/images/icons/icon_deleteLight.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 30px;
+    margin-top: 10px;
+    width: 30px;
+    &:hover {
+        background-image: url("/assets/images/icons/icon_deleteLight-hover.svg");
     }
 }
