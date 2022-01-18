@@ -34,6 +34,25 @@
     }
 }
 
+.st-blocShowFruit {
+    background-color: var(--secondaryColor2);
+    border-radius: 10px;
+    color: var(--background);
+    cursor: pointer;
+    padding: 10px 20px;
+    text-align: center;
+    width: 250px;
+    &:hover {
+        box-shadow: 0px 0px 10px var(--textColor);
+    }
+    h2 {
+        font-size: 20px;
+    }
+    img {
+        border-radius: 6px;
+    }
+}
+
 body[data-theme="dark"] .st-iconEdit {
     background-image: url("/assets/images/icons/icon_editDark.svg");
     background-repeat: no-repeat;
@@ -80,4 +99,34 @@ body[data-theme="light"] .st-iconDelete {
     &:hover {
         background-image: url("/assets/images/icons/icon_deleteLight-hover.svg");
     }
+}
+
+body[data-theme="dark"] .st-addFruit {
+    background-image: url("/assets/images/icons/icon_addDark.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    &:hover {
+        background-image: url("/assets/images/icons/icon_addDark-hover.svg");
+    }
+}
+
+body[data-theme="light"] .st-addFruit {
+    background-image: url("/assets/images/icons/icon_addLight.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    &:hover {
+        background-image: url("/assets/images/icons/icon_addLight-hover.svg");
+    }
+}
+
+body[data-theme="dark"] .st-blocAddFruit:hover .st-addFruit {
+    background-image: url("/assets/images/icons/icon_addDark-hover.svg");
+}
+
+body[data-theme="light"] .st-blocAddFruit:hover .st-addFruit {
+    background-image: url("/assets/images/icons/icon_addLight-hover.svg");
 }

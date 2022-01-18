@@ -4,6 +4,7 @@ import LocaleContext from '../../contexts/LocaleContext';
 import fruitRequest from '../../services/fruitRequest';
 import "../../../css/pages/fruits/fruits.scss";
 import calendarRequest from '../../services/calendarRequest';
+import userRequest from '../../services/userRequest';
 
 const FruitPage = ({history}) => {
     
@@ -11,6 +12,7 @@ const FruitPage = ({history}) => {
 
     const {id} = useParams();
     const [fruit, setFruit] = useState("");
+    const roleUser = useState(userRequest.getRoleUser());
     const [months, setMonths] = useState([]);
 
     useEffect(() => {
@@ -45,14 +47,16 @@ const FruitPage = ({history}) => {
         history.replace("/fruits");
     }
 
-    console.log(months);
-
     return ( 
         <div className="st-fruits">
             <div className="d-flex justify-content-center">
                 <h1>{locale === "en" ? fruit.nameEN : fruit.nameFR}</h1>
-                <p className="st-iconEdit" onClick={handleClick}></p>
-                <p className="st-iconDelete ml10" onClick={handleDelete}></p>
+                {roleUser[0] === "ADMIN" && 
+                    <>
+                        <p className="st-iconEdit" onClick={handleClick}></p>
+                        <p className="st-iconDelete ml10" onClick={handleDelete}></p>
+                    </>
+                }
             </div>
             <div className="d-flex justify-content-center">
                 {fruit.fileUrl && <img src={fruit.fileUrl} alt={"image " + fruit.nameFR}/>}

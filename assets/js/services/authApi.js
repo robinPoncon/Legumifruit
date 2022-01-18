@@ -5,6 +5,7 @@ function logout() {
     window.localStorage.removeItem("authToken");
     window.localStorage.removeItem("userTheme");
     window.localStorage.removeItem("userLocale");
+    window.localStorage.removeItem("userRole");
     delete axios.defaults.headers["Authorization"];
 }
 
@@ -17,6 +18,7 @@ function login(credentials) {
         window.localStorage.setItem("userTheme", jwtData.colorTheme);
         window.localStorage.setItem("userLocale", jwtData.locale);
         window.localStorage.setItem("authToken", token);
+        window.localStorage.setItem("roleUser", jwtData.roles);
         setAxiosToken(token);
     });
 }

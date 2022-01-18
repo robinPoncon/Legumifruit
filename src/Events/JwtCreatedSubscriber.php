@@ -19,6 +19,7 @@ class JwtCreatedSubscriber
         $data["lastName"] = $user->getLastName();
         $data["colorTheme"] = $user->getColorTheme();
         $data["locale"] = $user->getLocale();
+        $data["roles"] = $user->getRoles();
 
         $event->setData($data);
     }

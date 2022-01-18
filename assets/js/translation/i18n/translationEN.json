@@ -1,5 +1,6 @@
 {
     "nav": {
+        "add": "Add",
         "blog": "Blog",
         "dark-theme": "Dark theme",
         "fruits": "Fruits",
@@ -9,6 +10,9 @@
         "registration": "Registration",
         "update": "Update",
         "vegetables": "Vegetables"
+    },
+    "various": {
+        "read-more": "Read more"
     },
     "error-message": {
         "already-email": "The email address you entered is already in use.",
@@ -27,6 +31,7 @@
         "home": "Home"
     },
     "fruitsPage": {
+        "add-fruit": "Add fruit",
         "allFruits": "All fruits",
         "fruit-description": "Fruit description",
         "fruit-image": "Fruit image",

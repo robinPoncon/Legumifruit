@@ -18,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=FruitRepository::class)
  * @Vich\Uploadable
  * @UniqueEntity(
- *  fields={"nameEN", "nameFR"},
+ *  fields={"nameFR"},
  *  message="The name of the fruit you entered already exists."
  * )
  * @ApiResource(
@@ -48,8 +48,7 @@ class Fruit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50, unique=true)
-     * @Assert\NotBlank(message="This field cannot be empty.")
+     * @ORM\Column(type="string", length=50, nullable=true)
      * @Groups({"fruit_read"})
      */
     private $nameEN;
@@ -73,7 +72,8 @@ class Fruit
     private $users;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, unique=true)
+     * @Assert\NotBlank(message="This field cannot be empty.")
      * @Groups({"fruit_read"})
      */
     private $nameFR;

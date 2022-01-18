@@ -1,49 +1,29 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
 import checkAllInputs from '../../components/FormErrorManagement/checkAllInputs';
 import ShowingError from '../../components/FormErrorManagement/ShowingError';
 import verificationsFront from '../../components/FormErrorManagement/verificationsFront';
 import LocaleContext from '../../contexts/LocaleContext';
 import calendarRequest from '../../services/calendarRequest';
 import fruitRequest from '../../services/fruitRequest';
-import localeRequest from '../../services/localeRequest';
 
-const EditFruitPage = ({history}) => {
+const AddFruitPage = (props) => {
 
-    const [nameFruit, setNameFruit] = useState("");
+    const {t} = useTranslation();
     const [errorMessage, setErrorMessage] = useState(null);
     const [disabledBtn, setDisabledBtn] = useState(true);
     const [isSubmited, setIsSubmited] = useState(false);
-    const { t } = useTranslation();
-    const {id} = useParams();
     const {locale} = useContext(LocaleContext);
-    const [urlImg, setUrlImg] = useState(null);
-    const [fileToSent, setFileToSent] = useState(null);
-
     const [verifInputs, setVerifInputs] = useState({});
     const [allMonths, setAllMonths] = useState([]);
-    const [monthsExist, setMonthsExist] = useState([]);
-
-    // if (locale === "en") {
-    //     setVerifInputs({
-    //         nameEN: "",
-    //         descriptionEN: ""
-    //     });
-    // }
-    // else {
-    //     setVerifInputs({
-    //         nameFR: "",
-    //         descriptionFR: ""
-    //     });
-    // }
+    const [fileToSent, setFileToSent] = useState(null);
 
     const [allInputs, setAllInputs] = useState({
         nameEN: "",
         descriptionEN: "",
         nameFR: "",
         descriptionFR: "",
-        monthsSelected: []
+        calendar: []
     });
 
     useEffect(() => {
@@ -57,39 +37,11 @@ const EditFruitPage = ({history}) => {
     }, [verifInputs, isSubmited, disabledBtn]);
 
     useEffect(() => {
-        fruitRequest.getFruit(id)
+        calendarRequest.getAllCalendars()
         .then(response => {
-            let data = response.data;
-            setAllInputs({...allInputs, 
-                nameEN: data.nameEN,
-                descriptionEN: data.descriptionEN,
-                nameFR: data.nameFR,
-                descriptionFR: data.descriptionFR,
-                monthsSelected: data.calendar
-            });
-            setUrlImg(data.fileUrl);
-            if (locale === "en") {
-                setNameFruit(response.data.nameEN);
-            }
-            else {
-                setNameFruit(response.data.nameFR);
-            }
-            let arrayCalendar = data.calendar;
-            let newCalendar = [];
-            console.log(arrayCalendar);
-            arrayCalendar.forEach(month => {
-                newCalendar.push(Number(month.match(/\d+/)[0]));
-            })
-            setMonthsExist(newCalendar);
-
-            calendarRequest.getAllCalendars()
-            .then(response => {
-                setAllMonths(response.data);
-            })
-            .catch(error => console.log(error));
+            setAllMonths(response.data);
         })
         .catch(error => console.log(error));
-
     }, []);
 
     const handleChange = (event) => {
@@ -119,19 +71,19 @@ const EditFruitPage = ({history}) => {
         let isChecked = event.currentTarget.checked;
         let id = event.currentTarget.id;
         if (isChecked) {
-            let arrayMonth = allInputs.monthsSelected;
+            let arrayMonth = allInputs.calendar;
             arrayMonth.push("/api/calendars/" + id);
-            setAllInputs({...allInputs, monthsSelected: arrayMonth});
+            setAllInputs({...allInputs, calendar: arrayMonth});
         }
         else {
-            let newArray = allInputs.monthsSelected;
+            let newArray = allInputs.calendar;
             let index = newArray.indexOf("/api/calendars/" + id);
             if (index !== -1) {
                 newArray.splice(index, 1);
             }
-            setAllInputs({...allInputs, monthsSelected: newArray});
+            setAllInputs({...allInputs, calendar: newArray});
         }
-        console.log(allInputs.monthsSelected);
+        console.log(allInputs.calendar);
     }
 
     const handleSubmit = async(e) => {
@@ -143,8 +95,8 @@ const EditFruitPage = ({history}) => {
         
         try {
             //await localeRequest.translateDeepL(targetLang, allInputs.nameFR);
-            await fruitRequest.updateFruit(id, allInputs);
-            await fruitRequest.updateImgFruit(id, fileToSent);
+            let idFruit = await fruitRequest.addFruit(allInputs);
+            await fruitRequest.updateImgFruit(idFruit, fileToSent);
             history.push("/fruits/");
         } catch (error) {
             let errorMessage = error.response.data.title;
@@ -158,9 +110,8 @@ const EditFruitPage = ({history}) => {
     }
 
     return ( 
-        <div className="st-fruitsEdit">
-
-            <h1>{t("nav.update") + " " + t("fruitsPage.the-fruit") + " - " + nameFruit}</h1>
+        <div>
+            <h1>{t("fruitsPage.add-fruit")}</h1>
 
             {errorMessage && <ShowingError message={errorMessage}/>}
 
@@ -223,7 +174,6 @@ const EditFruitPage = ({history}) => {
 
                 <div className={"form-group mb20 " + (!errorMessage ? "mt20" : "")}>
                     <label className="required mb10" htmlFor="fileFruit">{t("fruitsPage.fruit-image")}</label>
-                    <p>{urlImg && <img src={urlImg} alt={t("fruitsPage.fruit-image")} width="250px" height="200px"></img>}</p>
                     <input 
                         type="file" 
                         value={allInputs.file}
@@ -242,19 +192,17 @@ const EditFruitPage = ({history}) => {
                             id={month.id} 
                             type="checkbox" 
                             onChange={onChangeCheckbox} 
-                            defaultChecked={
-                                monthsExist.indexOf(month.id) === -1 ? false : true
-                            }
+                            defaultChecked={false}
                         />
                     </div>
                 ))}
                 
                 <div className="form-group mt30">
-                    <button className={"st-actionBtn2 " + (disabledBtn ? "disabled" : "")}>{t("nav.update")}</button>
+                    <button className={"st-actionBtn2 " + (disabledBtn ? "disabled" : "")}>{t("nav.add")}</button>
                 </div>
             </form>
         </div> 
     );
 }
  
-export default EditFruitPage;
+export default AddFruitPage;

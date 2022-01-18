@@ -14,7 +14,7 @@ function getAllFruits() {
 function addFruit(fruitDatas) {
     return axios
     .post("https://localhost:8000/api/fruits", fruitDatas)
-    .then(response => console.log(response));
+    .then(response => response.data.id);
 }
 
 function updateFruit(idFruit, fruitDatas) {

@@ -1,5 +1,6 @@
 {
     "nav": {
+        "add": "Ajouter",
         "blog": "Blog",
         "dark-theme": "Thème sombre",
         "fruits": "Fruits",
@@ -9,6 +10,9 @@
         "registration": "Inscription",
         "update": "Modifier",
         "vegetables": "Légumes"
+    },
+    "various": {
+        "read-more": "En savoir plus"
     },
     "error-message": {
         "already-email": "L'adresse électronique que vous avez saisie est déjà utilisée.",
@@ -27,6 +31,7 @@
         "home": "Page d'accueil"
     },
     "fruitsPage": {
+        "add-fruit": "Ajouter un fruit",
         "allFruits": "Tous les fruits",
         "fruit-description": "Description du fruit",
         "fruit-image": "Image du fruit",
