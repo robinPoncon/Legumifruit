@@ -27,8 +27,13 @@
         "verif-iban": "Veuillez renseigner un iban valide.",
         "verif-atLeastOneNumber": "Ce champs doit comporter au moins 1 chiffre."
     },
+    "blogPage": {
+        "futur-feature": "Une partie blog arrivera bientôt avec l'objectif de partager des idées/astuces pour consommer en étant plus responsable, limiter les déchets du quotidien, remplacer les produits chimiques, etc."
+    },
     "homePage": {
-        "home": "Page d'accueil"
+        "home": "Page d'accueil",
+        "welcome": "Bienvenue sur Légumifruit !",
+        "find-all-items": "Ici, vous retrouverez les fruits et les légumes de saison selon le mois sélectionné."
     },
     "fruitsPage": {
         "add-fruit": "Ajouter un fruit",

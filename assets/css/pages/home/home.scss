@@ -1,0 +1,17 @@
+.st-blocHome {
+    h2 {
+        font-size: 25px;
+    }
+}
+
+.st-months {
+    border: 2px solid var(--secondaryColor);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 10px 0;
+    text-align: center;
+    width: 180px;
+    &.active {
+        background-color: var(--secondaryColor);
+    }
+}

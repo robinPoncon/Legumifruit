@@ -27,8 +27,13 @@
         "verif-iban": "Please enter a valid iban.",
         "verif-atLeastOneNumber": "This field must contain at least 1 digit."
     },
+    "blogPage": {
+        "futur-feature": "A blog section will soon arrive with the aim of sharing ideas/tricks for consuming more responsibly, limiting everyday waste, replacing chemicals, etc."
+    },
     "homePage": {
-        "home": "Home"
+        "home": "Home",
+        "welcome": "Welcome to Légumifruit !",
+        "find-all-items": "Here you will find the fruits and vegetables in season according to the selected month."
     },
     "fruitsPage": {
         "add-fruit": "Add fruit",
