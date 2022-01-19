@@ -1,0 +1,79 @@
+@media all and (max-width: 1200px) {
+    main {
+        width: 1000px;
+    }
+    .st-monthsHome {
+        width: 150px;
+    }
+
+    .st-parentBlocShowFruit {
+        justify-content: space-around !important;
+    }
+
+    .st-blocShowFruit {
+        width: 260px;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    main {
+        width: 700px;
+    }
+}
+
+@media all and (max-width: 768px) {
+    main {
+        width: 500px;
+    }
+    .st-blocShowFruit {
+        width: 200px;
+        img {
+            width: 160px;
+            height: 120px;
+        }
+    }
+    .st-blocFruitDetail {
+        flex-direction: column;
+        img {
+            margin: auto;
+            margin-bottom: 30px;
+            margin-top: -50px;
+        }
+    }
+    .st-fruits .st-describeFruit {
+        width: auto;
+        margin-left: 0;
+    }
+    .st-showMonths {
+        flex-direction: column;
+        .st-months {
+            margin-left: 0;
+        }
+    }
+    .st-fruitsEdit .st-fileInput {
+        width: auto;
+    }
+}
+
+@media all and (max-width: 576px) {
+    main {
+        width: 350px;
+    }
+}
+
+@media all and (max-width: 420px) {
+    main {
+        width: 300px;
+    }
+    .st-blocTitleFruit {
+        flex-direction: column;
+        text-align: center;
+        div {
+            margin: auto;
+            margin-top: 20px;
+        }
+    }
+    .st-monthsHome {
+        width: 120px;
+    }
+}

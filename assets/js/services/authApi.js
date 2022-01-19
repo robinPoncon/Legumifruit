@@ -5,7 +5,7 @@ function logout() {
     window.localStorage.removeItem("authToken");
     window.localStorage.removeItem("userTheme");
     window.localStorage.removeItem("userLocale");
-    window.localStorage.removeItem("userRole");
+    window.localStorage.removeItem("roleUser");
     delete axios.defaults.headers["Authorization"];
 }
 

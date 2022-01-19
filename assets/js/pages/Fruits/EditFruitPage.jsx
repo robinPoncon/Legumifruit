@@ -237,15 +237,16 @@ const EditFruitPage = ({history}) => {
 
                 {allMonths.map(month => (
                     <div key={month.id} className="d-flex">
-                        <label htmlFor={month.id}>{locale === "en" ? month.nameEN : month.nameFR}</label>
                         <input 
                             id={month.id} 
                             type="checkbox" 
+                            className="cpointer"
                             onChange={onChangeCheckbox} 
                             defaultChecked={
                                 monthsExist.indexOf(month.id) === -1 ? false : true
                             }
                         />
+                        <label className="ml20 cpointer" htmlFor={month.id}>{locale === "en" ? month.nameEN : month.nameFR}</label>
                     </div>
                 ))}
                 

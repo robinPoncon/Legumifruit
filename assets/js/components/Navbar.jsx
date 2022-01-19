@@ -28,8 +28,8 @@ const Navbar = ({history}) => {
                     <li className="fs18"><NavLink to="/blog">{t("nav.blog")}</NavLink></li>
                 </ul>
             </div>
-            <SwitchLang/>
-            <div className="st-navigationRight">
+            <div className="st-navigationRight d-flex">
+                <SwitchLang/>
                 {!isAuthenticated ? 
                     <>
                         <NavLink to="/registration">{t("nav.registration")}</NavLink>

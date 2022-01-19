@@ -5,6 +5,7 @@ const DEEPL_APIKEY="bc763c77-88e6-2693-03b9-9c8d3c92e45b%3Afx";
 
 function getLocaleUser() {
     const userLocale = window.localStorage.getItem("userLocale");
+    console.log(userLocale);
     if (userLocale) {
         setAppLocale(userLocale);
         return userLocale;

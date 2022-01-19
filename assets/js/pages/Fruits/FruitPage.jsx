@@ -23,6 +23,7 @@ const FruitPage = ({history}) => {
             calendarArray.forEach(calendar => {
                 let newArray = calendar.split("/");
                 let calendarId = newArray.at(-1);
+                setMonths([]);
                 calendarRequest.getCalendar(calendarId)
                 .then(response => {
                     if (locale === "en") {
@@ -36,7 +37,7 @@ const FruitPage = ({history}) => {
             });
         })
         .catch(error => console.log(error));
-    }, []);
+    }, [locale]);
 
     const handleClick = () => {
         history.push("/fruits/" + id + "/modifier");
@@ -58,11 +59,11 @@ const FruitPage = ({history}) => {
                     </>
                 }
             </div>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center st-blocFruitDetail">
                 {fruit.fileUrl && <img src={fruit.fileUrl} alt={"image " + fruit.nameFR}/>}
                 <div className="ml50 st-describeFruit">
                     <p>{locale === "en" ? fruit.descriptionEN : fruit.descriptionFR}</p>
-                    <div className="mt50 d-flex">
+                    <div className="mt50 d-flex st-showMonths">
                         <p className="fw700 fs16">Mois de consommation:</p> 
                         <p className="fs14 ml10 fw600 st-months">{months.map((month, i, array) => <span key={i} className="italic">{month}{i !== (array.length-1) ? ", " : ""}</span>)}</p>
                     </div>

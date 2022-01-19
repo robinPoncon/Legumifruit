@@ -4,14 +4,19 @@
     }
 }
 
-.st-months {
+.st-monthsHome {
     border: 2px solid var(--secondaryColor);
     border-radius: 6px;
     cursor: pointer;
     padding: 10px 0;
     text-align: center;
     width: 180px;
-    &.active {
+    &.active, &:hover {
         background-color: var(--secondaryColor);
     }
+}
+
+.st-fruitName:hover {
+    color: var(--primaryColor);
+    cursor: pointer;
 }

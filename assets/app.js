@@ -26,7 +26,7 @@ import {Switch, Route, BrowserRouter, withRouter} from "react-router-dom";
 import AllFruitsPage from './js/pages/Fruits/AllFruitsPage';
 import NotFoundPage from './js/pages/NotFoundPage';
 import AllVegetablesPage from './js/pages/AllVegetablesPage';
-import BlocPage from './js/pages/BlocPage';
+import BlogPage from './js/pages/BlogPage';
 import RegistrationPage from './js/pages/RegistrationPage';
 import LoginPage from './js/pages/LoginPage';
 import authAPI from "./js/services/authAPI";
@@ -39,6 +39,8 @@ import LocaleContext from './js/contexts/LocaleContext';
 import { useTranslation } from 'react-i18next';
 import FruitPage from './js/pages/Fruits/FruitPage';
 import EditFruitPage from './js/pages/Fruits/EditFruitPage';
+import AddFruitPage from './js/pages/Fruits/AddFruitPage';
+import "./css/responsive.scss";
 
 authAPI.setup();
 
@@ -74,11 +76,12 @@ const App = () => {
                         <ThemeColor/>
                         <main className="st-principalContainer" data-theme={theme}>
                             <Switch>
+                                <Route path="/fruits/ajouter" component={AddFruitPage}></Route>
                                 <Route path="/fruits/:id/modifier" component={EditFruitPage}></Route>
                                 <Route path="/fruits/:id" component={FruitPage}></Route>
                                 <Route exact path="/fruits" component={AllFruitsPage}></Route>
                                 <Route exact path="/vegetables" component={AllVegetablesPage}></Route>
-                                <Route exact path="/blog" component={BlocPage}></Route>
+                                <Route exact path="/blog" component={BlogPage}></Route>
                                 <Route exact path="/registration" component={RegistrationPage}></Route>
                                 <Route exact path="/login" component={LoginPage}/>
                                 <Route exact path="/" component={HomePage}></Route>

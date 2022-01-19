@@ -187,13 +187,14 @@ const AddFruitPage = (props) => {
 
                 {allMonths.map(month => (
                     <div key={month.id} className="d-flex">
-                        <label htmlFor={month.id}>{locale === "en" ? month.nameEN : month.nameFR}</label>
                         <input 
                             id={month.id} 
                             type="checkbox" 
+                            className="cpointer"
                             onChange={onChangeCheckbox} 
                             defaultChecked={false}
                         />
+                        <label className="ml20 cpointer" htmlFor={month.id}>{locale === "en" ? month.nameEN : month.nameFR}</label>
                     </div>
                 ))}
                 
