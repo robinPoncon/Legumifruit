@@ -7,7 +7,7 @@ import LocaleContext from '../../contexts/LocaleContext';
 import calendarRequest from '../../services/calendarRequest';
 import fruitRequest from '../../services/fruitRequest';
 
-const AddFruitPage = (props) => {
+const AddFruitPage = ({history}) => {
 
     const {t} = useTranslation();
     const [errorMessage, setErrorMessage] = useState(null);
@@ -83,20 +83,20 @@ const AddFruitPage = (props) => {
             }
             setAllInputs({...allInputs, calendar: newArray});
         }
-        console.log(allInputs.calendar);
     }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
         setIsSubmited(true);
-        console.log("test");
 
         let targetLang = locale === "en" ? "FR" : "EN"; 
         
         try {
             //await localeRequest.translateDeepL(targetLang, allInputs.nameFR);
             let idFruit = await fruitRequest.addFruit(allInputs);
-            await fruitRequest.updateImgFruit(idFruit, fileToSent);
+            if (fileToSent) {
+                await fruitRequest.updateImgFruit(idFruit, fileToSent);
+            }
             history.push("/fruits/");
         } catch (error) {
             let errorMessage = error.response.data.title;

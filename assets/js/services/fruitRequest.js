@@ -34,7 +34,7 @@ function updateImgFruit(idFruit, img) {
     }
     return axios
     .post("https://localhost:8000/api/fruits/" + idFruit + "/image", formData, config)
-    .then(response => console.log("uplaod"));
+    .then(response => console.log(response));
 }
 
 function deleteFruit(idFruit) {
