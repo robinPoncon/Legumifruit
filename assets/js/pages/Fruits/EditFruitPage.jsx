@@ -43,7 +43,7 @@ const EditFruitPage = ({history}) => {
         descriptionEN: "",
         nameFR: "",
         descriptionFR: "",
-        monthsSelected: []
+        calendar: []
     });
 
     useEffect(() => {
@@ -65,7 +65,7 @@ const EditFruitPage = ({history}) => {
                 descriptionEN: data.descriptionEN,
                 nameFR: data.nameFR,
                 descriptionFR: data.descriptionFR,
-                monthsSelected: data.calendar
+                calendar: data.calendar
             });
             setUrlImg(data.fileUrl);
             if (locale === "en") {
@@ -119,19 +119,19 @@ const EditFruitPage = ({history}) => {
         let isChecked = event.currentTarget.checked;
         let id = event.currentTarget.id;
         if (isChecked) {
-            let arrayMonth = allInputs.monthsSelected;
+            let arrayMonth = allInputs.calendar;
             arrayMonth.push("/api/calendars/" + id);
-            setAllInputs({...allInputs, monthsSelected: arrayMonth});
+            setAllInputs({...allInputs, calendar: arrayMonth});
         }
         else {
-            let newArray = allInputs.monthsSelected;
+            let newArray = allInputs.calendar;
             let index = newArray.indexOf("/api/calendars/" + id);
             if (index !== -1) {
                 newArray.splice(index, 1);
             }
-            setAllInputs({...allInputs, monthsSelected: newArray});
+            setAllInputs({...allInputs, calendar: newArray});
         }
-        console.log(allInputs.monthsSelected);
+        console.log(allInputs.calendar);
     }
 
     const handleSubmit = async(e) => {
