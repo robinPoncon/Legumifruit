@@ -35,11 +35,9 @@ const SwitchLang = () => {
             i18n.changeLanguage(Language.EN);
         }
     }, [lang]);
-
-    console.log("locale est en " + locale);
  
     return (
-        <div className="mtb-auto">
+        <div className="mtb-auto st-blocSelectLang">
             {locale === "fr" ? 
                 <img className="cpointer" src={flagEN} alt="flag EN" onClick={() => changeLanguage(Language.EN)} width="40px" height="30px"/>
             :

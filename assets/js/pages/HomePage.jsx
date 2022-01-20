@@ -8,6 +8,7 @@ import fruitRequest from '../services/fruitRequest';
 const HomePage = ({history}) => {
     const { t } = useTranslation();
     const {locale} = useContext(LocaleContext);
+    const [isLoading, setIsLoading] = useState(false);
     const [actifMonth, setActifMonth] = useState("January");
     const [allMonths, setAllMonths] = useState([]);
     const [fruitsPerMonth, setFruitsPerMonth] = useState({
@@ -39,9 +40,9 @@ const HomePage = ({history}) => {
         "December": false,
     })
 
-    useEffect(() => {
-        let newDataObject = fruitsPerMonth;
+    let newDataObject = fruitsPerMonth;
 
+    useEffect(() => {
         calendarRequest.getAllCalendars()
         .then(response => {
             setAllMonths(response.data);
@@ -60,6 +61,7 @@ const HomePage = ({history}) => {
                     }
                 }
             })
+            setIsLoading(true);
         })
         .catch(error => console.log(error));
 
@@ -86,14 +88,11 @@ const HomePage = ({history}) => {
         }
         setArrayMonths({...arrayMonths, newObject});
         setActifMonth(month);
-        console.log(fruitsPerMonth[month]);
     }
 
     const handleSelectFruit = (fruitId) => {
         history.push("/fruits/" + fruitId)
     }
-
-    // console.log(fruitsPerMonth);
     
     return ( 
         <article className="st-blocHome">
