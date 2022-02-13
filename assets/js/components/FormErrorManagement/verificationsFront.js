@@ -127,7 +127,7 @@ const verificationsFront = (event, translate, valueEditor = false) => {
 
 // Verifications methods with algorythm
 const isValidSiret = (siret) => {
-    let siretFormat = siret.replaceAll(" ", "");
+    let siretFormat = siret.replace(/\s/g, '');
     if ((siretFormat.length !== 14) || (isNaN(Number(siretFormat)))) {
         return false;
     }
@@ -150,7 +150,7 @@ const isValidSiret = (siret) => {
 }
 
 const isValidCifNif = (cifNif) => {
-    let value = cifNif.replaceAll(" ", "");
+    let value = cifNif.replace(/\s/g, '');
     let DNI_REGEX = /^(\d{8})([A-Z])$/;
     let CIF_REGEX = /^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/;
     let NIE_REGEX = /^[XYZ]\d{7,8}[A-Z]$/;

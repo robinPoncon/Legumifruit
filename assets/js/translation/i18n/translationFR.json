@@ -19,6 +19,7 @@
         "already-pseudo": "Le pseudonyme que vous avez saisie est déjà utilisé.",
         "invalid-credentials": "L'email et/ou le mot de passe sont incorrects",
         "fruit-name": "Le nom de ce fruit existe déjà, veuillez en choisir un autre.",
+        "vegetable-name": "Le nom de ce légume existe déjà, veuillez en choisir un autre.",
         "verif-email": "Veuillez renseigner une adresse mail valide.",
         "verif-empty": "Veuillez remplir ce champ.",
         "verif-siret": "Il semblerait que ce SIRET n’existe pas.",
@@ -44,7 +45,12 @@
         "the-fruit": "le fruit"
     },
     "vegetablesPage": {
-        "allVegetables": "Tous les légumes"
+        "add-vegetable": "Ajouter un légume",
+        "allVegetables": "Tous les légumes",
+        "vegetable-description": "Description du légume",
+        "vegetable-image": "Image du légume",
+        "vegetable-name": "Nom du légume",
+        "the-vegetable": "le légume"
     },
     "loginPage": {
         "mail-address": "Adresse email",

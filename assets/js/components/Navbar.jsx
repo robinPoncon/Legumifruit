@@ -33,7 +33,7 @@ const Navbar = ({history}) => {
                 <div className="st-navigationLeft">
                     <ul>
                         <li className="fs30"><NavLink to="/">Légumifruit</NavLink></li>
-                        <li className="fs18"><NavLink to="/vegetables">{t("nav.vegetables")}</NavLink></li>
+                        <li className="fs18"><NavLink to="/legumes">{t("nav.vegetables")}</NavLink></li>
                         <li className="fs18"><NavLink to="/fruits">{t("nav.fruits")}</NavLink></li>
                         <li className="fs18"><NavLink to="/blog">{t("nav.blog")}</NavLink></li>
                     </ul>
@@ -55,7 +55,7 @@ const Navbar = ({history}) => {
             <div className="st-blocMenuMobile">
                 <div className="st-navigationLeftMobile">
                     <ul>
-                        <li className="fs18"><NavLink to="/vegetables" onClick={() => setIsOpenMenu(false)}>{t("nav.vegetables")}</NavLink></li>
+                        <li className="fs18"><NavLink to="/legumes" onClick={() => setIsOpenMenu(false)}>{t("nav.vegetables")}</NavLink></li>
                         <li className="fs18"><NavLink to="/fruits" onClick={() => setIsOpenMenu(false)}>{t("nav.fruits")}</NavLink></li>
                         <li className="fs18"><NavLink to="/blog" onClick={() => setIsOpenMenu(false)}>{t("nav.blog")}</NavLink></li>
                     </ul>

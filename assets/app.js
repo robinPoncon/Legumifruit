@@ -24,8 +24,8 @@ import Navbar from './js/components/Navbar';
 import HomePage from './js/pages/HomePage';
 import {Switch, Route, BrowserRouter, withRouter} from "react-router-dom";
 import AllFruitsPage from './js/pages/Fruits/AllFruitsPage';
+import AllVegetablesPage from "./js/pages/Vegetables/AllVegetablesPage";
 import NotFoundPage from './js/pages/NotFoundPage';
-import AllVegetablesPage from './js/pages/AllVegetablesPage';
 import BlogPage from './js/pages/BlogPage';
 import RegistrationPage from './js/pages/RegistrationPage';
 import LoginPage from './js/pages/LoginPage';
@@ -41,6 +41,7 @@ import FruitPage from './js/pages/Fruits/FruitPage';
 import EditFruitPage from './js/pages/Fruits/EditFruitPage';
 import AddFruitPage from './js/pages/Fruits/AddFruitPage';
 import "./css/responsive.scss";
+import EditVegetablePage from './js/pages/Vegetables/EditVegetablePage';
 
 authAPI.setup();
 
@@ -80,7 +81,8 @@ const App = () => {
                                 <Route path="/fruits/:id/modifier" component={EditFruitPage}></Route>
                                 <Route path="/fruits/:id" component={FruitPage}></Route>
                                 <Route exact path="/fruits" component={AllFruitsPage}></Route>
-                                <Route exact path="/vegetables" component={AllVegetablesPage}></Route>
+                                <Route path="/legumes/:id/modifier" component={EditVegetablePage}></Route>
+                                <Route exact path="/legumes" component={AllVegetablesPage}></Route>
                                 <Route exact path="/blog" component={BlogPage}></Route>
                                 <Route exact path="/registration" component={RegistrationPage}></Route>
                                 <Route exact path="/login" component={LoginPage}/>

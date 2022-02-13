@@ -8,7 +8,7 @@ use App\Repository\FruitRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class UploadImageController extends AbstractController
+class UploadImageFruitController extends AbstractController
 {
     public function __invoke(Request $request, FruitRepository $fruitRepo)
     {

@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FruitRepository;
-use App\Controller\UploadImageController;
+use App\Controller\UploadImageFruitController;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\HttpFoundation\File\File;
@@ -32,7 +32,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *              "method"="POST",
  *              "path"="/fruits/{id}/image",
  *              "deserialize"=false,
- *              "controller"=UploadImageController::class,
+ *              "controller"=UploadImageFruitController::class,
  *          }
  *       }
  * )
