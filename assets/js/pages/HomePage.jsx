@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import LocaleContext from '../contexts/LocaleContext';
 import calendarRequest from '../services/calendarRequest';
 import "../../css/pages/home/home.scss";
-import fruitRequest from '../services/fruitRequest';
 
 const HomePage = ({history}) => {
     const { t } = useTranslation();
@@ -46,35 +45,25 @@ const HomePage = ({history}) => {
         calendarRequest.getAllCalendars()
         .then(response => {
             setAllMonths(response.data);
-            response.data.forEach(dataMonth => {
-                let arrayFruitsId = dataMonth.fruits;
-                let arrayFruits = [];
-                arrayFruitsId.forEach(fruit => {
-                    let fruitId = Number(fruit.match(/\d+/)[0]);
-                    fruitRequest.getFruit(fruitId).then(res => {
-                        arrayFruits.push(res.data);
-                    });
-                })
-                for (let i in newDataObject) {
-                    if (i === dataMonth.nameEN) {
-                        newDataObject[i] = arrayFruits;
-                    }
-                }
-            })
-            setIsLoading(true);
         })
         .catch(error => console.log(error));
-
-        setTimeout(() => {
-            setFruitsPerMonth({...fruitsPerMonth, newDataObject});
-            console.log("test");
-        }, 1500);
 
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         let todayMonth = monthNames[new Date().getMonth()];
         setArrayMonths({...arrayMonths, [todayMonth]: true});
         setActifMonth(todayMonth);
-    }, [locale])
+    }, [locale]);
+
+    useEffect(() => {
+        if (allMonths) {
+            let copyfruitsPerMonth = {...fruitsPerMonth};
+            for (let month of allMonths) {
+                copyfruitsPerMonth[month.nameEN] = month.fruits;
+            }
+            setFruitsPerMonth(copyfruitsPerMonth);
+            setIsLoading(true)
+        }
+    }, [allMonths]);
 
     const handleSelectMonth = (month) => {
         let newObject = arrayMonths;

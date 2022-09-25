@@ -41,7 +41,7 @@ const LoginPage = ({history}) => {
         }   
     }, [verifInputs, isSubmited, disabledBtn]);
 
-    function handleChange(event) {
+    const handleChange = (event) => {
         let nameInput = event.currentTarget.name;
         let value = event.currentTarget.value;
         setCredentials({...credentials, [nameInput]: value});

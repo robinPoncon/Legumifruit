@@ -43,19 +43,19 @@ class Fruit
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"fruit_read"})
+     * @Groups({"fruit_read", "calendar_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Groups({"fruit_read"})
+     * @Groups({"fruit_read", "calendar_read"})
      */
     private $nameEN;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"fruit_read"})
+     * @Groups({"fruit_read", "calendar_read"})
      */
     private $descriptionEN;
 
@@ -74,13 +74,13 @@ class Fruit
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank(message="This field cannot be empty.")
-     * @Groups({"fruit_read"})
+     * @Groups({"fruit_read", "calendar_read"})
      */
     private $nameFR;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"fruit_read"})
+     * @Groups({"fruit_read", "calendar_read"})
      */
     private $descriptionFR;
 
@@ -102,7 +102,7 @@ class Fruit
 
     /**
      * @var string|null
-     * @Groups({"fruit_read"})
+     * @Groups({"fruit_read", "calendar_read"})
      */
     private $fileUrl;
 

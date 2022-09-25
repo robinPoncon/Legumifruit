@@ -24,8 +24,6 @@ const Navbar = ({history}) => {
         isOpenMenu ? setIsOpenMenu(false) : setIsOpenMenu(true);
     }
 
-    console.log(breakpoint);
-
     return ( 
         <nav className={"d-flex st-navbarContainer" + (breakpoint <= 768 ? " flex-column" : "")}>
             {breakpoint > 768 &&

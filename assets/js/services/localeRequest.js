@@ -1,11 +1,10 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-const DEEPL_APIKEY="bc763c77-88e6-2693-03b9-9c8d3c92e45b%3Afx";
+// const DEEPL_APIKEY="bc763c77-88e6-2693-03b9-9c8d3c92e45b%3Afx";
 
 function getLocaleUser() {
     const userLocale = window.localStorage.getItem("userLocale");
-    console.log(userLocale);
     if (userLocale) {
         setAppLocale(userLocale);
         return userLocale;
@@ -37,14 +36,14 @@ function setAppLocale(locale) {
 }
 
 function translateDeepL(targetLang, text) {
-    const config = {
-        headers: {
-            "Access-Control-Allow-Origin": "*"
-        }
-    }
-    return axios
-    .get("https://api-free.deepl.com/v2/translate?auth_key=" + DEEPL_APIKEY + "&text=" + text + "&target_lang=" + targetLang, config)
-    .then(response => console.log(response));
+//     const config = {
+//         headers: {
+//             "Access-Control-Allow-Origin": "*"
+//         }
+//     }
+//     return axios
+//     .get("https://api-free.deepl.com/v2/translate?auth_key=" + DEEPL_APIKEY + "&text=" + text + "&target_lang=" + targetLang, config)
+//     .then(response => console.log(response));
 }
 
 export default {

@@ -44,7 +44,7 @@ const RegistrationPage = ({history}) => {
         setDataToSend({...dataToSend, locale: locale, colorTheme: theme});
     }, [verifInputs, dataToSend, isSubmited]);
 
-    function handleChange(event) {
+    const handleChange = (event) => {
         let nameInput = event.currentTarget.name;
         let value = event.currentTarget.value;
         setDataToSend({...dataToSend, [nameInput]: value});
