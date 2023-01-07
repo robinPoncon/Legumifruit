@@ -33,7 +33,7 @@ const AllVegetablesPage = ({history}) => {
                 {roleUser[0] === "ADMIN" && 
                     <div className="d-flex st-blocAddFruit cpointer" onClick={handleAddVegetable}> 
                         <p className="st-addFruit mtb-auto mr10"></p>
-                        <p className="mtb-auto">{t("fruitsPage.add-fruit")}</p>
+                        <p className="mtb-auto">{t("vegetablesPage.add-vegetable")}</p>
                     </div>
                 }
             </div>

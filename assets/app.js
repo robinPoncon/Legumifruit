@@ -42,6 +42,7 @@ import EditFruitPage from './js/pages/Fruits/EditFruitPage';
 import AddFruitPage from './js/pages/Fruits/AddFruitPage';
 import "./css/responsive.scss";
 import EditVegetablePage from './js/pages/Vegetables/EditVegetablePage';
+import AddVegetablePage from './js/pages/Vegetables/AddVegetablePage';
 
 authAPI.setup();
 
@@ -81,6 +82,7 @@ const App = () => {
                                 <Route path="/fruits/:id/modifier" component={EditFruitPage}></Route>
                                 <Route path="/fruits/:id" component={FruitPage}></Route>
                                 <Route exact path="/fruits" component={AllFruitsPage}></Route>
+                                <Route path="/legumes/ajouter" component={AddVegetablePage}></Route>
                                 <Route path="/legumes/:id/modifier" component={EditVegetablePage}></Route>
                                 <Route exact path="/legumes" component={AllVegetablesPage}></Route>
                                 <Route exact path="/blog" component={BlogPage}></Route>
