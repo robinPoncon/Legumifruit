@@ -60,12 +60,6 @@ class Vegetable
     private $descriptionEN;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"vegetable_read"})
-     */
-    private $image;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Calendar::class, inversedBy="vegetables")
      * @Groups({"vegetable_read"})
      */
@@ -143,18 +137,6 @@ class Vegetable
     public function setDescriptionEN(?string $descriptionEN): self
     {
         $this->descriptionEN = $descriptionEN;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }
