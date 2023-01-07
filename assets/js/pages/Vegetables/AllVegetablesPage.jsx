@@ -24,6 +24,8 @@ const AllVegetablesPage = ({history}) => {
         history.push("/legumes/ajouter");
     }
 
+    let test;
+
     return (
         <>
             <div className="d-flex justify-content-between st-blocTitleFruit">
