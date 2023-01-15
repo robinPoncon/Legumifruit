@@ -5,11 +5,13 @@ import "../../../css/pages/fruits/fruits.scss";
 import calendarRequest from '../../services/calendarRequest';
 import userRequest from '../../services/userRequest';
 import vegetableRequest from '../../services/vegetableRequest';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const VegetablePage = ({history}) => {
     
     const {locale} = useContext(LocaleContext);
-
+    const {t} = useTranslation();
     const {id} = useParams();
     const [vegetable, setVegetable] = useState("");
     const roleUser = useState(userRequest.getRoleUser());
@@ -45,6 +47,7 @@ const VegetablePage = ({history}) => {
 
     const handleDelete = async() => {
         await vegetableRequest.deleteVegetable(id);
+        toast.success(t("flash-message.delete-vegetable"));
         history.replace("/legumes");
     }
 

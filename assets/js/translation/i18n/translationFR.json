@@ -28,6 +28,17 @@
         "verif-iban": "Veuillez renseigner un iban valide.",
         "verif-atLeastOneNumber": "Ce champs doit comporter au moins 1 chiffre."
     },
+    "flash-message": {
+        "add-fruit": "Le fruit a bien été ajouté !",
+        "add-vegetable": "Le légume a bien été ajouté !",
+        "delete-fruit": "Le fruit a bien été supprimé !",
+        "delete-vegetable": "Le légume a bien été supprimé !",
+        "login-success": "Vous êtes désormais connecté !",
+        "logout-success": "Vous êtes désormais déconnecté !",
+        "registration-success": "Votre compte a bien été créé !",
+        "update-fruit": "Le fruit a bien été mis à jour !",
+        "update-vegetable": "Le légume a bien été mis à jour !"
+    },
     "blogPage": {
         "futur-feature": "Une partie blog arrivera bientôt avec l'objectif de partager des idées/astuces pour consommer en étant plus responsable, limiter les déchets du quotidien, remplacer les produits chimiques, etc."
     },

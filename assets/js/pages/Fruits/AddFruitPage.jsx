@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import checkAllInputs from '../../components/FormErrorManagement/checkAllInputs';
 import ShowingError from '../../components/FormErrorManagement/ShowingError';
 import verificationsFront from '../../components/FormErrorManagement/verificationsFront';
@@ -96,6 +97,7 @@ const AddFruitPage = ({history}) => {
             if (fileToSent) {
                 await fruitRequest.updateImgFruit(idFruit, fileToSent);
             }
+            toast.success(t("flash-message.add-fruit"));
             history.push("/fruits/");
         } catch (error) {
             let errorMessage = error.response.data.title;

@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import checkAllInputs from '../../components/FormErrorManagement/checkAllInputs';
 import ShowingError from '../../components/FormErrorManagement/ShowingError';
 import verificationsFront from '../../components/FormErrorManagement/verificationsFront';
@@ -141,6 +142,7 @@ const EditVegetablePage = ({history}) => {
             //await localeRequest.translateDeepL(targetLang, allInputs.nameFR);
             await vegetableRequest.updateVegetable(id, allInputs);
             await vegetableRequest.updateImgVegetable(id, fileToSent);
+            toast.success(t("flash-message.update-vegetable"));
             history.push("/legumes/");
         } catch (error) {
             let errorMessage = error.response.data.title;

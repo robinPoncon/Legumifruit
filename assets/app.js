@@ -36,7 +36,6 @@ import themeColorRequest from './js/services/themeColorRequest';
 import ThemeColor from './js/components/ThemeColor';
 import localeRequest from "./js/services/localeRequest";
 import LocaleContext from './js/contexts/LocaleContext';
-import { useTranslation } from 'react-i18next';
 import FruitPage from './js/pages/Fruits/FruitPage';
 import EditFruitPage from './js/pages/Fruits/EditFruitPage';
 import AddFruitPage from './js/pages/Fruits/AddFruitPage';
@@ -44,6 +43,8 @@ import "./css/responsive.scss";
 import EditVegetablePage from './js/pages/Vegetables/EditVegetablePage';
 import AddVegetablePage from './js/pages/Vegetables/AddVegetablePage';
 import VegetablePage from './js/pages/Vegetables/VegetablePage';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 authAPI.setup();
 
@@ -95,6 +96,7 @@ const App = () => {
                             </Switch>
                         </main>
                     </BrowserRouter>
+                    <ToastContainer position={toast.POSITION.TOP_CENTER}/>
                 </AuthContext.Provider>
             </ThemeContext.Provider>
         </LocaleContext.Provider>

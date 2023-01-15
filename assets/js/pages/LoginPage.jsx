@@ -9,6 +9,7 @@ import localeRequest from '../services/localeRequest';
 import { useTranslation } from 'react-i18next';
 import verificationsFront from "../components/FormErrorManagement/verificationsFront";
 import checkAllInputs from '../components/FormErrorManagement/checkAllInputs';
+import { toast } from 'react-toastify';
 
 const LoginPage = ({history}) => {
 
@@ -70,6 +71,7 @@ const LoginPage = ({history}) => {
             themeColorRequest.setAppTheme(theme);
             localeRequest.setAppLocale(locale);
             setIsAuthenticated(true);
+            toast.success(t("flash-message.login-success"));
             history.replace("/");
         }
         catch(error) {

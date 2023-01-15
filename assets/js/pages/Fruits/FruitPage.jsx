@@ -5,11 +5,13 @@ import fruitRequest from '../../services/fruitRequest';
 import "../../../css/pages/fruits/fruits.scss";
 import calendarRequest from '../../services/calendarRequest';
 import userRequest from '../../services/userRequest';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const FruitPage = ({history}) => {
     
     const {locale} = useContext(LocaleContext);
-
+    const {t} = useTranslation();
     const {id} = useParams();
     const [fruit, setFruit] = useState("");
     const roleUser = useState(userRequest.getRoleUser());
@@ -45,6 +47,7 @@ const FruitPage = ({history}) => {
 
     const handleDelete = async() => {
         await fruitRequest.deleteFruit(id);
+        toast.success(t("flash-message.delete-fruit"));
         history.replace("/fruits");
     }
 

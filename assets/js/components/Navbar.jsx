@@ -5,6 +5,7 @@ import themeColorRequest from "../services/themeColorRequest";
 import authContext from "../contexts/AuthContext";
 import SwitchLang from "../translation/SwitchLang";
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const Navbar = ({history}) => {
 
@@ -17,6 +18,7 @@ const Navbar = ({history}) => {
         authAPI.logout();
         themeColorRequest.setAppTheme("light");
         setIsAuthenticated(false);
+        toast.info(t("flash-message.logout-success"));
         history.push("/login");
     }
 
