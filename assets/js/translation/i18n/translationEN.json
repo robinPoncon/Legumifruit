@@ -28,8 +28,19 @@
         "verif-iban": "Please enter a valid iban.",
         "verif-atLeastOneNumber": "This field must contain at least 1 digit."
     },
+    "flash-message": {
+        "add-fruit": "The fruit has been added!",
+        "add-vegetable": "The vegetable has been added!",
+        "delete-fruit": "The fruit has been deleted!",
+        "delete-vegetable": "Vegetable has been deleted!",
+        "login-success": "You are now logged in!",
+        "logout-success": "You are now logged out!",
+        "registration-success": "Your account has been created!",
+        "update-fruit": "The fruit has been updated!",
+        "update-vegetable": "The vegetable has been updated!"
+    },
     "blogPage": {
-        "futur-feature": "A blog section will soon arrive with the aim of sharing ideas/tricks for consuming more responsibly, limiting everyday waste, replacing chemicals, etc."
+        "future-feature": "A blog part will arrive soon with the aim of sharing ideas/tricks for consuming more responsibly, limiting everyday waste, replacing chemicals, etc."
     },
     "homePage": {
         "home": "Home",

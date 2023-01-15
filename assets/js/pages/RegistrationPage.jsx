@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import checkAllInputs from '../components/FormErrorManagement/checkAllInputs';
 import ShowingError from '../components/FormErrorManagement/ShowingError';
 import verificationsFront from '../components/FormErrorManagement/verificationsFront';
@@ -66,6 +67,7 @@ const RegistrationPage = ({history}) => {
         
         try {
             await userRequest.create(dataToSend);
+            toast.success(t("flash-message.registration-success"))
             history.replace("/login");
         }
         catch(error) {
