@@ -64,7 +64,6 @@ const AddFruitPage = ({history}) => {
     const handleChangeFile = (event) => {
         let fileUpload = event.currentTarget.files[0];
         setFileToSent(fileUpload);
-        console.log(fileUpload);
     }
 
     const onChangeCheckbox = (event) => {

@@ -76,7 +76,6 @@ const EditFruitPage = ({history}) => {
             }
             let arrayCalendar = data.calendar;
             let newCalendar = [];
-            console.log(arrayCalendar);
             arrayCalendar.forEach(month => {
                 newCalendar.push(Number(month.match(/\d+/)[0]));
             })
@@ -112,7 +111,6 @@ const EditFruitPage = ({history}) => {
     const handleChangeFile = (event) => {
         let fileUpload = event.currentTarget.files[0];
         setFileToSent(fileUpload);
-        console.log(fileUpload);
     }
 
     const onChangeCheckbox = (event) => {
@@ -131,13 +129,11 @@ const EditFruitPage = ({history}) => {
             }
             setAllInputs({...allInputs, calendar: newArray});
         }
-        console.log(allInputs.calendar);
     }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
         setIsSubmited(true);
-        console.log("test");
 
         let targetLang = locale === "en" ? "FR" : "EN"; 
         

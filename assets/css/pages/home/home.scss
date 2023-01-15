@@ -16,7 +16,13 @@
     }
 }
 
-.st-fruitName:hover {
+.st-fruitOrVegetableName:hover {
     color: var(--primaryColor);
     cursor: pointer;
+}
+
+.st-fruitPerMonth, .st-vegetablePerMonth {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 700;
 }

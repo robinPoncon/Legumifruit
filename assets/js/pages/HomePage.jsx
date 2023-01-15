@@ -10,7 +10,7 @@ const HomePage = ({history}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [actifMonth, setActifMonth] = useState("January");
     const [allMonths, setAllMonths] = useState([]);
-    const [fruitsPerMonth, setFruitsPerMonth] = useState({
+    const [fruitsAndVegetablesPerMonth, setFruitsAndVegetablesPerMonth] = useState({
         "January": [],
         "February": [],
         "March": [],
@@ -39,8 +39,6 @@ const HomePage = ({history}) => {
         "December": false,
     })
 
-    let newDataObject = fruitsPerMonth;
-
     useEffect(() => {
         calendarRequest.getAllCalendars()
         .then(response => {
@@ -56,12 +54,12 @@ const HomePage = ({history}) => {
 
     useEffect(() => {
         if (allMonths) {
-            let copyfruitsPerMonth = {...fruitsPerMonth};
+            let copyfruitsAndVegetables = {...fruitsAndVegetablesPerMonth};
             for (let month of allMonths) {
-                copyfruitsPerMonth[month.nameEN] = month.fruits;
+                copyfruitsAndVegetables[month.nameEN] = {fruits: month.fruits, vegetables: month.vegetables};
             }
-            setFruitsPerMonth(copyfruitsPerMonth);
-            setIsLoading(true)
+            setFruitsAndVegetablesPerMonth(copyfruitsAndVegetables);
+            setIsLoading(true);
         }
     }, [allMonths]);
 
@@ -80,7 +78,11 @@ const HomePage = ({history}) => {
     }
 
     const handleSelectFruit = (fruitId) => {
-        history.push("/fruits/" + fruitId)
+        history.push("/fruits/" + fruitId);
+    }
+
+    const handleSelectVegetable = (vegetableId) => {
+        history.push("/legumes/" + vegetableId);
     }
     
     return ( 
@@ -97,9 +99,16 @@ const HomePage = ({history}) => {
                 ))}
             </div>
             <div>
+                <p className="st-fruitPerMonth">{t("nav.fruits")} :</p>
                 <ul>
-                    {fruitsPerMonth[actifMonth].sort((a, b) => (locale === "en" ? (a.nameEN > b.nameEN ? 1 : -1) : (a.nameFR > b.nameFR ? 1 : -1))).map(fruit => (
-                        <li className="st-fruitName" key={fruit.id} onClick={() => handleSelectFruit(fruit.id)}>{locale === "en" ? fruit.nameEN : fruit.nameFR}</li>
+                    {fruitsAndVegetablesPerMonth[actifMonth]?.fruits?.sort((a, b) => (locale === "en" ? (a.nameEN > b.nameEN ? 1 : -1) : (a.nameFR > b.nameFR ? 1 : -1))).map((fruit, index) => (
+                        <li className="st-fruitOrVegetableName" key={index} onClick={() => handleSelectFruit(fruit.id)}>{locale === "en" ? fruit.nameEN : fruit.nameFR}</li>
+                    ))}
+                </ul>
+                <p className="st-vegetablePerMonth">{t("nav.vegetables")} :</p>
+                <ul>
+                    {fruitsAndVegetablesPerMonth[actifMonth]?.vegetables?.sort((a, b) => (locale === "en" ? (a.nameEN > b.nameEN ? 1 : -1) : (a.nameFR > b.nameFR ? 1 : -1))).map((vegetable, index) => (
+                        <li className="st-fruitOrVegetableName" key={index} onClick={() => handleSelectVegetable(vegetable.id)}>{locale === "en" ? vegetable.nameEN : vegetable.nameFR}</li>
                     ))}
                 </ul>
             </div>

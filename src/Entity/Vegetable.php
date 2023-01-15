@@ -43,19 +43,19 @@ class Vegetable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"vegetable_read"})
+     * @Groups({"vegetable_read", "calendar_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Groups({"vegetable_read"})
+     * @Groups({"vegetable_read", "calendar_read"})
      */
     private $nameEN;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"vegetable_read"})
+     * @Groups({"vegetable_read", "calendar_read"})
      */
     private $descriptionEN;
 
@@ -74,13 +74,13 @@ class Vegetable
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank(message="This field cannot be empty.")
-     * @Groups({"vegetable_read"})
+     * @Groups({"vegetable_read", "calendar_read"})
      */
     private $nameFR;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"vegetable_read"})
+     * @Groups({"vegetable_read", "calendar_read"})
      */
     private $descriptionFR;
 
@@ -102,7 +102,7 @@ class Vegetable
 
     /**
      * @var string|null
-     * @Groups({"vegetable_read"})
+     * @Groups({"vegetable_read", "calendar_read"})
      */
     private $fileUrl;
 
