@@ -75,8 +75,8 @@ This project focuses on:
 
 ## Installation
 
-```
-bashgit clone https://github.com/robinPoncon/Legumifruit.git
+```bash
+git clone https://github.com/robinPoncon/Legumifruit.git
 cd Legumifruit
 ```
 
