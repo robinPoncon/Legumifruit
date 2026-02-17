@@ -34,7 +34,6 @@ The application is designed to be scalable and could evolve into a broader platf
 - SCSS
 
 ### Tools
-- Docker
 - Webpack
 - Git
 
