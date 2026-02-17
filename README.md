@@ -75,8 +75,10 @@ This project focuses on:
 
 ## Installation
 
-git clone https://github.com/robinPoncon/Legumifruit.git
+```
+bashgit clone https://github.com/robinPoncon/Legumifruit.git
 cd Legumifruit
+```
 
 ### Backend
 
